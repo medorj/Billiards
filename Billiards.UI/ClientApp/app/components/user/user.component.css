@@ -1,0 +1,11 @@
+.icon-pointer{
+    cursor: pointer;
+}
+
+.icon-pointer:hover{
+    color: #ce1126;
+}
+
+.icon-pointer.header{
+    font-size: 18px;
+}

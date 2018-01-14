@@ -1,0 +1,47 @@
+<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" (click)="toggleNav()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/home">Billiards</a>
+        </div>
+        <div class="collapse navbar-collapse" [style.display]="showNav ? 'block' : 'none'">
+            <ul class="nav navbar-nav">
+                <li routerLinkActive="active" (click)="hideNav()">
+                    <a [routerLink]="['home']">Home</a>
+                </li>
+                <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                    <a routerLink="matches">Matches</a>
+                </li>
+                <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                    <a [routerLink]="['user']">User Setup</a>
+                </li>
+            </ul>
+            <div class="navbar-header navbar-right">
+                <ul class="nav navbar-nav">
+                    <li *ngIf="!loginService.isAuthenticated()">
+                        <a [routerLink]="['login']" (click)="hideNav()">Login</a>
+                    </li>
+                    <li *ngIf="loginService.isAuthenticated()">
+                        <a class="dropdown-toggle pointable" data-toggle="dropdown">
+                            Welcome {{loginService.currentUser?.FirstName}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a [routerLink]="['/profile/edit']">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a [routerLink]="['home']" (click)="logout()">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<h3 *ngIf="!pageLoaded">Loading matches...</h3>
+<div *ngIf="pageLoaded">
+    <h1>
+        Matches
+        <i *ngIf="viewAsList" class="glyphicon glyphicon-th-large icon-pointer header" (click)="toggleList()"></i>
+        <i *ngIf="!viewAsList" class="glyphicon glyphicon-list icon-pointer header" (click)="toggleList()"></i>
+    </h1>
+    <button class="btn btn-primary" [routerLink]="['/matches/new']">Add Match</button>
+    <hr>
+    <div *ngIf="!viewAsList" class="row">
+        <div class="col-md-6" *ngFor="let match of matchClasses">
+            <div class="well" [routerLink]="['/matches', match.match.MatchId]">
+                <div class="row minheight">
+                    <div class="col-xs-11 minheight">
+                        <h4>{{match.match.Title}}</h4>
+                        <div style="font-size: 16px">{{match.match.Date | date:'MM/dd/yyyy'}}</div>
+                        <div style="font-size: 16px">{{match.totalMatches()}} Game{{match.totalMatches() != 1 ? 's' : ''}} Played</div>
+                        <hr />
+                        <match-progress *ngIf="match.totalMatches() > 0" [match]="match"></match-progress>
+                    </div>
+                    <div class="col-xs-1 minheight icon">
+                        <i class="glyphicon glyphicon-chevron-right" style="font-size: 18px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table *ngIf="viewAsList" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Games Played</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="pointable" *ngFor="let match of matches" [routerLink]="['/matches', match.MatchId]">
+                <td>{{match.Title}}</td>
+                <td>{{match.Date | date:'MM/dd/yyyy'}}</td>
+                <td>{{match.GameCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

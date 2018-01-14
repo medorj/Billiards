@@ -1,0 +1,34 @@
+.well h3{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.well:hover{
+    background-color: #5d5d5d;
+    cursor: pointer;
+    color: white;
+}
+
+.icon-pointer{
+    cursor: pointer;
+}
+
+.icon-pointer:hover{
+    color: #ce1126;
+}
+
+.icon-pointer.header{
+    font-size: 18px;
+}
+
+.row.minheight{
+    min-height: 175px;
+}
+
+.row.minheight > .minheight{
+    min-height: 175px;
+}
+
+.minheight.icon {
+    padding-top: 80px;
+}

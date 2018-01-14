@@ -1,0 +1,48 @@
+﻿.well-selection{
+    text-align: center;
+}
+
+.well-selection:hover {
+    background-color: none;
+    cursor: pointer;
+}
+
+.well-selection.selected{
+    background-color: darkgreen;
+    font-weight: bold;
+    color: white;
+}
+
+@media(max-width: 767px) {
+    .btn-full {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+.header-minor {
+    font-size: 18px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.btn-custom{
+    font-size: 18px;
+    /*padding: 8px 16px;*/
+}
+
+.text-custom{
+    font-size: 18px;
+    padding: 0 12px;
+}
+
+hr {
+    margin: 10px 0;
+}
+
+.small-header{
+    font-weight: bold;
+    margin: 5px 0;
+}

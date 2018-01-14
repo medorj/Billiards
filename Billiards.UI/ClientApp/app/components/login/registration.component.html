@@ -1,0 +1,59 @@
+﻿<h1>Register</h1>
+<h2 *ngIf="isEdit">Edit Profile</h2>
+<form *ngIf="isEdit" #f="ngForm" (ngSubmit)="editRegistration(f.value)" autocomplete="off">
+    <div class="row">
+        <div class="col-sm-5">
+            <input type="hidden" [ngModel]="LoginId" name="LoginId" />
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <em *ngIf="f.controls.FirstName?.invalid && f.controls.FirstName?.touched">Required</em>
+                <input type="text" required class="form-control" name="FirstName" [(ngModel)]="FirstName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <em *ngIf="f.controls.LastName?.invalid && f.controls.LastName?.touched">Required</em>
+                <input type="text" required class="form-control" name="LastName" [(ngModel)]="LastName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">User Name</label>
+                <em *ngIf="f.controls.UserName?.invalid && f.controls.UserName?.touched">Required</em>
+                <input type="text" required class="form-control" name="UserName" [(ngModel)]="UserName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <em *ngIf="f.controls.Password?.invalid && f.controls.Password?.touched">Required</em>
+                <input type="password" required class="form-control" name="Password" [(ngModel)]="Password" />
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Save</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</form>
+<form *ngIf="!isEdit" #f="ngForm" (ngSubmit)="saveRegistration(f.value)" autocomplete="off">
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <em *ngIf="f.controls.FirstName?.invalid && f.controls.FirstName?.touched">Required</em>
+                <input type="text" required class="form-control" name="FirstName" [(ngModel)]="FirstName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <em *ngIf="f.controls.LastName?.invalid && f.controls.LastName?.touched">Required</em>
+                <input type="text" required class="form-control" name="LastName" [(ngModel)]="LastName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">User Name</label>
+                <em *ngIf="f.controls.UserName?.invalid && f.controls.UserName?.touched">Required</em>
+                <input type="text" required class="form-control" name="UserName" [(ngModel)]="UserName" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <em *ngIf="f.controls.Password?.invalid && f.controls.Password?.touched">Required</em>
+                <input type="password" required class="form-control" name="Password" [(ngModel)]="Password" />
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Save</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        </div>
+    </div>
+</form>

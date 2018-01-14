@@ -1,0 +1,16 @@
+﻿@media(max-width: 767px) {
+    .btn-full {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+.well {
+    text-align: center;
+}
+
+.well:hover {
+    background-color: #5d5d5d;
+    cursor: pointer;
+    color: white;
+}

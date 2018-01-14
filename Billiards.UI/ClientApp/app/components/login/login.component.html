@@ -1,0 +1,27 @@
+﻿<h1>Login</h1>
+<hr />
+<h2 *ngIf="isLoggingIn">Logging you in...</h2>
+<div *ngIf="!isLoggingIn" class="row">
+    <div *ngIf="!isLoggingIn" class="col-sm-4">
+        <form #f="ngForm" (ngSubmit)="login(f.value)" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label class="control-label" for="userName">User Name: </label>
+                <em *ngIf="f.controls.userName?.invalid && f.controls.userName?.touched">Required</em>
+                <input (ngModel)="userName" name="userName" required id="userName" type="text" class="form-control" placeholder="User Name..." />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="password">Password: </label>
+                <em *ngIf="f.controls.password?.invalid && f.controls.password?.touched">Required</em>
+                <input (ngModel)="password" name="password" required id="password" type="password" class="form-control" placeholder="Password..." />
+            </div>
+
+            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+        </form>
+        <br />
+        <div>
+            Not a user? <a [routerLink]="['/register']">Register.</a>
+        </div>
+        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid login info</div>
+    </div>
+</div>

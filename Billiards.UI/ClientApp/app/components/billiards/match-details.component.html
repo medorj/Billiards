@@ -1,0 +1,48 @@
+<h3 *ngIf="!match">Loading match...</h3>
+<div *ngIf="match">
+    <h2>{{match?.Title}}</h2>
+    <div style="margin-bottom: 10px;">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="bold">DATE</div>
+                <div class="header-minor">{{match?.Date | date:'MM/dd/yyyy'}}</div>
+            </div>
+            <div class="col-xs-4">
+                <div class="bold">GAMES PLAYED</div>
+                <div class="header-minor">{{totalMatches()}}</div>
+            </div>
+            <div class="col-xs-4">
+                <div class="bold">INNINGS</div>
+                <div class="header-minor">{{innings}}</div>
+            </div>
+        </div>
+    </div>
+    <match-progress [match]="matchClass"></match-progress>
+    <hr>
+    <h3>Games</h3>
+    <button type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
+    <div class="row" style="margin-top: 15px;">
+        <div *ngFor="let game of match?.Games" class="col-md-6">
+            <div class="well" [routerLink]="['game', game?.GameId]">
+                <div class="row minheight">
+                    <div class="col-xs-2 minheight">
+                        <div class="bold">GAME</div>
+                        <div style="font-size: 18px;">{{game.Number}}</div>
+                    </div>
+                    <div class="col-xs-5 minheight">
+                        <div class="bold">WINNER</div>
+                        <div style="font-size: 18px;">{{game.WinnerName}}</div>
+                    </div>
+                    <div class="col-xs-4 minheight">
+                        <div class="bold">INNINGS</div>
+                        <div style="font-size: 18px;">{{game.Innings}}</div>
+                    </div>
+                    <div class="col-xs-1 minheight icon">
+                        <i class="glyphicon glyphicon-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger" (click)="deleteGame()">Delete Match</button>
+</div>

@@ -1,0 +1,9 @@
+@media(max-width: '767px'){
+    .display-nav {
+        display: block !important;
+    }
+
+    .display-nav-hidden {
+        display: none !important;
+    }
+}
