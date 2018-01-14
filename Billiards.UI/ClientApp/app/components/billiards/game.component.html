@@ -74,10 +74,10 @@
                 </div>
             </div>
             <hr />
-            <h4>Winner</h4>
+            <div class="small-header">WINNER</div>
             <div class="row">
-                <div class="col-sm-6 col-xs-12" *ngFor="let user of opponents">
-                    <div class="well well-selection" [class.selected]="user.IsSelected" (click)="selectWinner(user)">
+                <div class="col-sm-6 col-xs-6" *ngFor="let user of opponents">
+                    <div class="well well-sm well-selection" [class.selected]="user.IsSelected" (click)="selectWinner(user)">
                         {{user.FirstName}} {{user.LastName}}
                     </div>
                 </div>

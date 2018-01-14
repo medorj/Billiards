@@ -23,7 +23,7 @@
     <button type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
     <div class="row" style="margin-top: 15px;">
         <div *ngFor="let game of match?.Games" class="col-md-6">
-            <div class="well" [routerLink]="['game', game?.GameId]">
+            <div class="well well-sm" [routerLink]="['game', game?.GameId]">
                 <div class="row minheight">
                     <div class="col-xs-2 minheight">
                         <div class="bold">GAME</div>

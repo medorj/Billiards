@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\billiards\billiards-route-activator.service.ts" />
+    <None Remove="ClientApp\app\components\billiards\billiards.module.ts" />
     <None Remove="ClientApp\app\components\billiards\game-user.class.ts" />
     <None Remove="ClientApp\app\components\billiards\match.class.ts" />
     <None Remove="ClientApp\app\components\billiards\name.pipe.ts" />
@@ -30,16 +31,20 @@
     <None Remove="ClientApp\app\components\errors\404.component.ts" />
     <None Remove="ClientApp\app\components\login\index.ts" />
     <None Remove="ClientApp\app\components\login\login.model.ts" />
+    <None Remove="ClientApp\app\components\login\login.module.ts" />
     <None Remove="ClientApp\app\components\login\login.service.ts" />
     <None Remove="ClientApp\app\components\login\registration.component.ts" />
     <None Remove="ClientApp\app\components\user\authentication-route-activator.service.ts" />
     <None Remove="ClientApp\app\components\user\login.component.ts" />
+    <None Remove="ClientApp\app\components\user\user.module.ts" />
     <None Remove="ClientApp\app\index.ts" />
+    <None Remove="ClientApp\app\shared.module.ts" />
     <None Remove="Properties\PublishProfiles\MedorTest - Web Deploy.pubxml" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\billiards\billiards-route-activator.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\billiards\billiards.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\game-user.class.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\match-progress.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\match.class.ts" />
@@ -48,11 +53,14 @@
     <TypeScriptCompile Include="ClientApp\app\components\errors\404.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.model.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\login\login.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\authentication-route-activator.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\registration.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\user\user.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared.module.ts" />
   </ItemGroup>
 
   <ItemGroup>

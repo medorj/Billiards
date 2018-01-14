@@ -30,5 +30,9 @@
     }
 
 .minheight.icon {
-    padding-top: 20px;
+    padding-top: 15px;
+}
+
+.well-sm{
+    padding-right: 15px;
 }

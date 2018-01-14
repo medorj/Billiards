@@ -9,7 +9,7 @@
     <hr>
     <div *ngIf="!viewAsList" class="row">
         <div class="col-md-6" *ngFor="let match of matchClasses">
-            <div class="well" [routerLink]="['/matches', match.match.MatchId]">
+            <div class="well well-sm" [routerLink]="['/matches', match.match.MatchId]">
                 <div class="row minheight">
                     <div class="col-xs-11 minheight">
                         <h4>{{match.match.Title}}</h4>
@@ -19,7 +19,7 @@
                         <match-progress *ngIf="match.totalMatches() > 0" [match]="match"></match-progress>
                     </div>
                     <div class="col-xs-1 minheight icon">
-                        <i class="glyphicon glyphicon-chevron-right" style="font-size: 18px;"></i>
+                        <i class="glyphicon glyphicon-chevron-right"></i>
                     </div>
                 </div>
             </div>
