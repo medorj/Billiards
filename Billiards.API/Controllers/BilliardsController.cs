@@ -213,6 +213,8 @@ namespace Billiards.API.Controllers
                 efGame.WinnerUserId = game.WinnerUserId;
                 efGame.IsActive = true;
                 efGame.Innings = game.Innings;
+                efGame.WinType = game.WinType;
+                efGame.Badge = game.Badge;
                 if (game.GameUsers.Any())
                 {
                     foreach (var user in game.GameUsers)

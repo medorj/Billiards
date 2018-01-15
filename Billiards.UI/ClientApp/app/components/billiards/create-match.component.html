@@ -4,24 +4,27 @@
         <div class="col-sm-6 col-xs-12">
             <div class="form-group">
                 <label class="control-label">Opponent 1</label>
-                <select #op1 class="form-control" name="User1Id" [(ngModel)]="User1Id">
+                <!--<em *ngIf="!validateUser1()">Required</em>-->
+                <select #op1 class="form-control" name="User1Id" [(ngModel)]="User1Id" (onchange)="validateUser1()">
                     <option value="0" disabled>Choose an opponent...</option>
                     <option *ngFor="let user of users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label class="control-label">Opponent 2</label>
-                <select #op2 class="form-control" name="User2Id" [(ngModel)]="User2Id">
+                <!--<em *ngIf="!validateUser2(op2.value)">Required</em>-->
+                <select #op2 class="form-control" name="User2Id" [(ngModel)]="User2Id" (onchange)="validateUser2(op2.value)">
                     <option value="0" disabled>Choose an opponent...</option>
                     <option *ngFor="let user of users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
                 </select>
             </div>
             <div class="form-group">
                 <label class="control-label">Date</label>
-                <input [(ngModel)]="Date" name="Date" class="form-control" type="date">
+                <em *ngIf="f.controls.Date?.invalid && f.controls.Date?.touched">Required</em>
+                <input required [(ngModel)]="Date" name="Date" class="form-control" type="date">
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save Match</button>
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid || !validateForm()">Save Match</button>
     <button type="button" class="btn btn-default" [routerLink]="['/matches']">Cancel Match</button>
 </form>

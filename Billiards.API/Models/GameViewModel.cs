@@ -13,7 +13,8 @@ namespace Billiards.API.Models
         public int? WinnerUserId { get; set; }
         public string WinnerName { get; set; }
         public int Innings { get; set; }
-        public int DefensiveShots { get; set; }
+        public int? WinType { get; set; }
+        public int? Badge { get; set; }
         public List<UserViewModel> Participants { get; set; }
         public MatchViewModel Match { get; set; }
         public List<GameUserViewModel> GameUsers { get; set; }
@@ -29,7 +30,9 @@ namespace Billiards.API.Models
                 MatchId = game.MatchId,
                 Number = game.Number,
                 Innings = game.Innings,
-                WinnerUserId = game.WinnerUserId
+                WinnerUserId = game.WinnerUserId,
+                WinType = game.WinType,
+                Badge = game.Badge
             };
             vm.Match = game.Match.ToViewModel(false);
             vm.Participants = new List<UserViewModel>();

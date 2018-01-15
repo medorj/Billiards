@@ -5,6 +5,8 @@
     [WinnerUserId] INT NULL,
     [IsActive]     BIT NOT NULL,
     [Innings]      INT NOT NULL,
+    [WinType] INT NULL , 
+    [Badge] INT NULL, 
     CONSTRAINT [PK_GameId] PRIMARY KEY CLUSTERED ([GameId] ASC),
     CONSTRAINT [FK_Game_Match] FOREIGN KEY ([MatchId]) REFERENCES [dbo].[Match] ([MatchId]),
     CONSTRAINT [FK_Game_User] FOREIGN KEY ([WinnerUserId]) REFERENCES [dbo].[User] ([UserId])

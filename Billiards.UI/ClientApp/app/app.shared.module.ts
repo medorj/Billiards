@@ -6,7 +6,7 @@ import { UserModule } from './components/user/user.module';
 import { LoginModule } from './components/login/login.module';
 
 import { AppComponent } from './components/app/app.component';
-import { HomeComponent } from './components/home/home.component';
+import { AboutComponent, HomeComponent } from './components/home/index';
 import { NavMenuComponent } from "./components/common/nav-menu.component";
 import { Error404Component } from './components/errors/404.component';
 import {
@@ -21,6 +21,7 @@ import {
         AppComponent,
         NavMenuComponent,
         HomeComponent,
+        AboutComponent,
         Error404Component
     ],
     imports: [
@@ -32,6 +33,7 @@ import {
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: '404', component: Error404Component },
             { path: 'home', component: HomeComponent },
+            { path: 'home/about', component: AboutComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

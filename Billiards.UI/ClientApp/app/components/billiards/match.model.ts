@@ -21,6 +21,8 @@ export interface IGame{
     WinnerName: string;
     Innings: number;
     GameUsers: IGameUser[];
+    WinType: number;
+    Badge: number;
 }
 
 export interface IGameUser {

@@ -1,26 +1,11 @@
-<div class="row">
-    <div class="col-sm-12">
-        <h1>Billiards Tracker</h1>
-        <div class="row">
-            <div class="col-sm-6">
-                <h2>Quick Start</h2>
-                <button *ngIf="isLoggedIn" class="btn btn-default btn-full" [routerLink]="['/matches/new']">Start a Match</button>
-                <button *ngIf="isLoggedIn" class="btn btn-default btn-full" [routerLink]="['/matches']">View Matches</button>
-                <button *ngIf="!isLoggedIn" class="btn btn-default btn-full" [routerLink]="['/login']">Login</button>
-            </div>
-            <div class="col-sm-6">
-                <h2>About</h2>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h3>Record Your Matches</h3>
-                        <p>Record the matches that you play.</p>
-                        <h3>View Your History</h3>
-                        <p>Go back and find out how you did in previous matches.</p>
-                        <h3>Manage Your Users</h3>
-                        <p>Manage the users that can participate in matches.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<h1>Billiards Tracker</h1>
+<h3>Quick Start</h3>
+<div *ngIf="isLoggedIn" class="startLink">
+    <a class="pointable" [routerLink]="['/matches/new']">Start a Match</a>
+</div>
+<div *ngIf="isLoggedIn" class="startLink">
+    <a [routerLink]="['/matches']">View Matches</a>
+</div>
+<div *ngIf="!isLoggedIn" class="startLink">
+    <a [routerLink]="['/login']">Login</a>
 </div>

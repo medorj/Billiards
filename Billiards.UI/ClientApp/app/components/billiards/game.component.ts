@@ -66,6 +66,7 @@ export class GameComponent implements OnInit{
 
     selectWinner(user: IUser) {
         this.selectedWinner = user;
+        this.game.WinType = 1;
         this.opponents.forEach(o => {
             if (o.UserId === user.UserId) {
                 o.IsSelected = true

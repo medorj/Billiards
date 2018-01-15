@@ -11,8 +11,18 @@
         </div>
         <div class="collapse navbar-collapse" [style.display]="showNav ? 'block' : 'none'">
             <ul class="nav navbar-nav">
-                <li routerLinkActive="active" (click)="hideNav()">
-                    <a [routerLink]="['home']">Home</a>
+                <li routerLinkActive="active">
+                    <a class="dropdown-toggle pointable" data-toggle="dropdown">
+                        Home<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a [routerLink]="['/home']" (click)="hideNav()">Home</a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['home/about']" (click)="hideNav()">About</a>
+                        </li>
+                    </ul>
                 </li>
                 <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
                     <a routerLink="matches">Matches</a>
@@ -33,7 +43,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a [routerLink]="['/profile/edit']">Edit Profile</a>
+                                <a [routerLink]="['/profile/edit']" (click)="hideNav()">Edit Profile</a>
                             </li>
                             <li>
                                 <a [routerLink]="['home']" (click)="logout()">Logout</a>

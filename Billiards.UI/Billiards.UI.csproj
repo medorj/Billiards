@@ -29,6 +29,8 @@
     <None Remove="ClientApp\app\components\billiards\name.pipe.ts" />
     <None Remove="ClientApp\app\components\common\configuration.ts" />
     <None Remove="ClientApp\app\components\errors\404.component.ts" />
+    <None Remove="ClientApp\app\components\home\about.component.ts" />
+    <None Remove="ClientApp\app\components\home\index.ts" />
     <None Remove="ClientApp\app\components\login\index.ts" />
     <None Remove="ClientApp\app\components\login\login.model.ts" />
     <None Remove="ClientApp\app\components\login\login.module.ts" />
@@ -51,6 +53,8 @@
     <TypeScriptCompile Include="ClientApp\app\components\billiards\name.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\common\configuration.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\errors\404.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\home\about.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\home\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.model.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.module.ts" />

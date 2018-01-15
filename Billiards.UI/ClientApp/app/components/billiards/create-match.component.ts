@@ -6,14 +6,19 @@ import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    templateUrl: './create-match.component.html'
+    templateUrl: './create-match.component.html',
+    styles: [`
+        em {float: right; color: #E05C65; padding-left: 10px; }
+    `]
 })
 
 export class CreateMatchComponent implements OnInit{
-    Date: string = "01/08/2018";
+    Date: string;
     users: IUser[] = [];
     User1Id: number = 0;
+    hasUser1IdError: boolean = false;
     User2Id: number = 0;
+    hasUser2IdError: boolean = false;
 
     constructor(private billiardsService: BilliardsService,
         private userService: UserService,
@@ -29,6 +34,18 @@ export class CreateMatchComponent implements OnInit{
                 console.log('ERROR: Error getting users')
             }
         );
+    }
+
+    validateUser1(): boolean {
+        return this.User1Id > 0;
+    }
+
+    validateUser2(): boolean {
+        return this.User2Id > 0;
+    }
+
+    validateForm() {
+        return this.User1Id > 0 && this.User2Id > 0;
     }
 
     saveMatch(formValues: any){

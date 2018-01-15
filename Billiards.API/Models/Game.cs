@@ -27,6 +27,10 @@ namespace Billiards.API.Models
 
         public int Innings { get; set; }
 
+        public int? WinType { get; set; }
+
+        public int? Badge { get; set; }
+
         public virtual Match Match { get; set; }
 
         public virtual User User { get; set; }

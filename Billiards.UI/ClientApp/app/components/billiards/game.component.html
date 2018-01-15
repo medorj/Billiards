@@ -76,9 +76,74 @@
             <hr />
             <div class="small-header">WINNER</div>
             <div class="row">
-                <div class="col-sm-6 col-xs-6" *ngFor="let user of opponents">
+                <div class="col-sm-6 col-xs-12" *ngFor="let user of opponents">
                     <div class="well well-sm well-selection" [class.selected]="user.IsSelected" (click)="selectWinner(user)">
                         {{user.FirstName}} {{user.LastName}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="small-header">WIN TYPE</div>
+                    <div *ngIf="!selectedWinner">First choose a winner...</div>
+                    <div *ngIf="selectedWinner">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="WinType" [(ngModel)]="game.WinType" [value]="1" />
+                                Standard
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="WinType" [(ngModel)]="game.WinType" [value]="2" />
+                                Scratched on 8-ball
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="WinType" [(ngModel)]="game.WinType" [value]="3" />
+                                8-ball - wrong pocket
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="WinType" [(ngModel)]="game.WinType" [value]="4" />
+                                Early 8-ball
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="WinType" [(ngModel)]="game.WinType" [value]="5" />
+                                Pocketed 8-ball after foul on the cue ball
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="WinType" [(ngModel)]="game.WinType" [value]="6" />
+                                Did not mark 8-ball pocket
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="small-header">BADGES</div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="null" />
+                            None
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="1" />
+                            8-ball on the break
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="2" />
+                            8-ball break and run
+                        </label>
                     </div>
                 </div>
             </div>

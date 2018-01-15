@@ -25,5 +25,6 @@ export class NavMenuComponent {
 
     logout() {
         this.loginService.logout();
+        this.hideNav();
     }
 }
