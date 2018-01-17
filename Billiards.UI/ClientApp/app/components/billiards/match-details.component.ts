@@ -14,8 +14,38 @@ export class MatchDetailsComponent implements OnInit{
     matchClass: Match;
     innings: number = 0;
     defensiveShots: number = 0;
+    sortDirection: string = "DESC";
+
+    constructor(private billiardsService: BilliardsService,
+        private route: ActivatedRoute,
+        private router: Router) {
+
+    }
+
+    ngOnInit() {
+        let sort: string = localStorage.getItem('matchSort');
+        if (sort) {
+            this.sortDirection = sort;
+        } else {
+            localStorage.setItem('matchSort', this.sortDirection);
+        }
+        this.refreshGames();
+    }
+
+    refreshGames() {
+        let id: number = +this.route.snapshot.params['id'];
+
+        this.billiardsService.getMatch(id, this.sortDirection).subscribe(
+            data => {
+                this.match = data;
+                this.matchClass = new Match(this.match);
+                this.aggregateGames();
+            }
+        );
+    }
 
     aggregateGames() {
+        this.innings = 0;
         this.match.Games.forEach(g => {
             this.innings += g.Innings;
         });
@@ -59,29 +89,11 @@ export class MatchDetailsComponent implements OnInit{
         return "0%";
     }
 
-    constructor(private billiardsService: BilliardsService,
-        private route: ActivatedRoute,
-        private router: Router){
-        
-    }
-
-    ngOnInit(){
-        let id : number = +this.route.snapshot.params['id'];
-
-        this.billiardsService.getMatch(id).subscribe(
-            data => {
-                this.match = data;
-                this.matchClass = new Match(this.match);
-                this.aggregateGames();
-            }
-        );
-    }
-
     addGame(){
         let matchId : number = +this.route.snapshot.params['id'];
         this.billiardsService.addGame({ MatchId: matchId}).subscribe(
             data => {
-                this.billiardsService.getMatch(matchId).subscribe(
+                this.billiardsService.getMatch(matchId, this.sortDirection).subscribe(
                     data => {
                         this.match = data
                     }
@@ -95,5 +107,15 @@ export class MatchDetailsComponent implements OnInit{
             data => {
                 this.router.navigate(["matches"]);
             });
+    }
+
+    toggleSort() {
+        if (this.sortDirection == "ASC") {
+            this.sortDirection = "DESC";
+        } else {
+            this.sortDirection = "ASC";
+        }
+        localStorage.setItem('matchSort', this.sortDirection);
+        this.refreshGames();
     }
 }

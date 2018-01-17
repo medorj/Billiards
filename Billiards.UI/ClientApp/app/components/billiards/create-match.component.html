@@ -9,7 +9,7 @@
                         (blur)="validateUser1(op1.value)" 
                         (change)="validateUser1(op1.value)">
                     <option value="0" disabled>Choose an opponent...</option>
-                    <option *ngFor="let user of users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
+                    <option *ngFor="let user of user1Users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
                 </select>
             </div>
             <div class="form-group" [class.has-error]="hasUser2IdError">
@@ -19,13 +19,20 @@
                         (blur)="validateUser2(op2.value)"
                         (change)="validateUser2(op2.value)">
                     <option value="0" disabled>Choose an opponent...</option>
-                    <option *ngFor="let user of users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
+                    <option *ngFor="let user of user2Users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
                 </select>
             </div>
             <div class="form-group" [class.has-error]="d.invalid && d.touched">
                 <label class="control-label">Date</label>
                 <em *ngIf="d.invalid && d.touched">Required</em>
                 <input #d="ngModel" required [(ngModel)]="Date" name="Date" class="form-control" type="date">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Match Type</label>
+                <select class="form-control" name="MatchTypeId" [(ngModel)]="MatchTypeId">
+                    <option value="1">Casual</option>
+                    <option value="2">APA</option>
+                </select>
             </div>
         </div>
     </div>

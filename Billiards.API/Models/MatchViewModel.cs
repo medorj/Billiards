@@ -16,20 +16,35 @@ namespace Billiards.API.Models
         public int User2Id { get; set; }
         public string User2Name { get; set; }
         public int User2Wins { get; set; }
+        public int MatchTypeId { get; set; }
         public List<GameViewModel> Games { get; set; }
         public int GameCount { get; set; }
+        public string MatchType
+        {
+            get
+            {
+                switch(MatchTypeId)
+                {
+                    case 2:
+                        return "APA";
+                    default:
+                        return "Casual";
+                }
+            }
+        }
     }
 
     public static class MatchMapper
     {
-        public static MatchViewModel ToViewModel(this Match match, bool loadGames = false)
+        public static MatchViewModel ToViewModel(this Match match, bool loadGames = false, string gameSort = "DESC")
         {
             var vm = new MatchViewModel
             {
                 MatchId = match.MatchId,
                 Date = match.Date,
                 User1Id = match.User1Id,
-                User2Id = match.User2Id
+                User2Id = match.User2Id,
+                MatchTypeId = match.MatchType
             };
             vm.User1Name = match.User != null ? match.User.FirstName + " " + match.User.LastName : string.Empty;
             vm.User2Name = match.User1 != null ? match.User1.FirstName + " " + match.User1.LastName : string.Empty;
@@ -39,7 +54,10 @@ namespace Billiards.API.Models
             vm.GameCount = match.Games.Count(g => g.IsActive);
             if (loadGames == true)
             {
-                vm.Games = match.Games.Where(g => g.IsActive).OrderByDescending(g => g.Number).ToViewModel().ToList();
+                if(gameSort == "ASC")
+                    vm.Games = match.Games.Where(g => g.IsActive).OrderBy(g => g.Number).ToViewModel().ToList();
+                else
+                    vm.Games = match.Games.Where(g => g.IsActive).OrderByDescending(g => g.Number).ToViewModel().ToList();
             }
 
             return vm;

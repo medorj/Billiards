@@ -22,8 +22,8 @@ export class BilliardsService{
         return this.http.get(this.baseUrl + 'Billiards/GetMatches').catch(this.handleError)
     }
 
-    getMatch(id: number){
-        return this.http.get(this.baseUrl + 'Billiards/GetMatch?id=' + id).catch(this.handleError);
+    getMatch(id: number, orderBy: string){
+        return this.http.get(this.baseUrl + 'Billiards/GetMatch?id=' + id + "&orderBy=" + orderBy).catch(this.handleError);
     }
 
     addMatch(match: IMatch) : Observable<IMatch>{

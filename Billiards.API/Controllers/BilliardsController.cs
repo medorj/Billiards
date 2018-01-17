@@ -21,7 +21,11 @@ namespace Billiards.API.Controllers
         [HttpGet]
         public IHttpActionResult GetUsers()
         {
-            return Ok(_db.Users.Where(u => u.IsActive).ToViewModel());
+            return Ok(_db.Users
+                .Where(u => u.IsActive)
+                .OrderBy(u => u.FirstName)
+                .ThenBy(u => u.LastName)
+                .ToViewModel());
         }
 
         [HttpGet]
@@ -85,12 +89,12 @@ namespace Billiards.API.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetMatch(int id)
+        public IHttpActionResult GetMatch(int id, string orderBy)
         {
             var match = _db.Matches.FirstOrDefault(m => m.MatchId == id);
             if (match != null)
             {
-                return Ok(match.ToViewModel(true));
+                return Ok(match.ToViewModel(true, orderBy));
             }
             return BadRequest("Match not found");
         }
@@ -105,16 +109,20 @@ namespace Billiards.API.Controllers
                     Date = match.Date,
                     User1Id = match.User1Id,
                     User2Id = match.User2Id,
-                    IsActive = true
+                    IsActive = true,
+                    MatchType = match.MatchTypeId
                 };
                 var user1 = _db.Users.FirstOrDefault(u => u.UserId == match.User1Id);
                 var user2 = _db.Users.FirstOrDefault(u => u.UserId == match.User2Id);
                 var matrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == user1.Handicap && h.Player2 == user2.Handicap);
                 int minWins = matrix.Player1Wins < matrix.Player2Wins ? matrix.Player1Wins : matrix.Player2Wins;
 
-                for(int i = 1; i <= minWins; i++)
+                if(efMatch.MatchType == 2)
                 {
-                    AddNewGame(ref efMatch, i);
+                    for (int i = 1; i <= minWins; i++)
+                    {
+                        AddNewGame(ref efMatch, i);
+                    }
                 }
 
                 _db.Matches.Add(efMatch);

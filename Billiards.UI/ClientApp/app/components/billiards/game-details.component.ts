@@ -24,7 +24,8 @@ import { BilliardsService } from './billiards.service';
             </div>
             <div class="col-xs-4">
                 <div class="small-header">WINNER</div>
-                <div class="header-minor">{{game?.WinnerName}}</div>
+                <div class="header-minor" *ngIf="game?.WinnerName">{{game?.WinnerName}}</div>
+                <div class="header-minor" *ngIf="!game?.WinnerName">Not Set</div>
             </div>
             <div class="col-xs-4">
                 <div class="small-header">INNINGS</div>

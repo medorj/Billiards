@@ -10,7 +10,7 @@ export class BilliardsRouteActivator implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot) {
         let matchExists = true;
-        this.billiardsService.getMatch(+route.params['id']).subscribe(
+        this.billiardsService.getMatch(+route.params['id'], "ASC").subscribe(
             data => {
                 matchExists = true;
             },
