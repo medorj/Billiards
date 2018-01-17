@@ -7,9 +7,10 @@ import { LoginModule } from './components/login/login.module';
 
 import { AppComponent } from './components/app/app.component';
 import { AboutComponent, HomeComponent } from './components/home/index';
-import { NavMenuComponent } from "./components/common/nav-menu.component";
 import { Error404Component } from './components/errors/404.component';
 import {
+    // components
+    NavMenuComponent,
     // services
     ConfigurationService,
     // route guards

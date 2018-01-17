@@ -2,9 +2,11 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from './index';
 
 @NgModule({
     declarations: [
+        SpinnerComponent
     ],
     imports: [
     ],
@@ -13,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     exports: [
         CommonModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        SpinnerComponent
     ]
 })
 

@@ -16,12 +16,10 @@ export class GameComponent implements OnInit{
     selectedWinner: IUser;
     opponents: IUser[];
     pageLoaded: boolean = false;
+    isSaving: boolean = false;
     gameUsers: GameUser[];
 
-    constructor(private billiardsService : BilliardsService,
-        private route: ActivatedRoute, private router: Router){
-
-    }
+    constructor(private billiardsService : BilliardsService, private route: ActivatedRoute, private router: Router){ }
 
     decrementInnings() {
         if (this.game.Innings > 0) {
@@ -89,6 +87,7 @@ export class GameComponent implements OnInit{
     }
 
     saveGame(formValues: IGame) {
+        this.isSaving = true;
         let gameToSave: IGame = formValues;
         if (this.selectedWinner) {
             gameToSave.WinnerUserId = this.selectedWinner.UserId;
@@ -98,6 +97,7 @@ export class GameComponent implements OnInit{
             data => {
                 this.game = data;
                 this.isEdit = false;
+                this.isSaving = false;
             }
         );
     }
