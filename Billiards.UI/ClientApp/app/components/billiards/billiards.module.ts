@@ -8,7 +8,8 @@ import {
     GameComponent,
     MatchProgressComponent,
     BilliardsService,
-    ShortNamePipe
+    ShortNamePipe,
+    GameDetailsComponent
 } from './index';
 import { AuthenticationRouteActivator} from '../login/authentication-route-activator.service'
 
@@ -19,7 +20,8 @@ import { AuthenticationRouteActivator} from '../login/authentication-route-activ
         CreateMatchComponent,
         GameComponent,
         MatchProgressComponent,
-        ShortNamePipe
+        ShortNamePipe,
+        GameDetailsComponent
     ],
     imports: [
         SharedModule,

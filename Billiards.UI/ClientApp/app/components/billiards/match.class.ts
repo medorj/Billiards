@@ -27,11 +27,8 @@ export class Match {
         return false;
     }
 
-    totalMatches(): number {
-        if (this.hasUnfinishedGames()) {
-            return this.gameCount - 1;
-        }
-        return this.gameCount;
+    totalGames(): number {
+        return this.games.filter(g => g.WinnerUserId > 0).length;
     }
 
     user1Text(): string {
@@ -44,14 +41,14 @@ export class Match {
 
     user1Percentage(): string {
         if (this.gameCount > 0) {
-            return ((this.user1Wins / this.totalMatches()) * 100) + '%';
+            return ((this.user1Wins / this.totalGames()) * 100) + '%';
         }
         return "0%";
     }
 
     user2Percentage() {
         if (this.gameCount > 0) {
-            return ((this.user2Wins / this.totalMatches()) * 100) + '%';
+            return ((this.user2Wins / this.totalGames()) * 100) + '%';
         }
         return "0%";
     }

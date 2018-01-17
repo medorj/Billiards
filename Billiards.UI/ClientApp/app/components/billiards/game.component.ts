@@ -76,10 +76,6 @@ export class GameComponent implements OnInit{
         });
     }
 
-    goToMatch(){
-        this.router.navigate(['matches', this.game.Match.MatchId]);
-    }
-
     private serializeGameUsers() : IGameUser[] {
         let array : IGameUser[] = new Array();
         this.gameUsers.forEach((g : GameUser)  => {
@@ -115,10 +111,7 @@ export class GameComponent implements OnInit{
         this.isEdit = !this.isEdit;
     }
 
-    deleteGame() {
-        this.billiardsService.deleteGame(this.game).subscribe(
-            data => {
-                this.router.navigate(['matches', this.game.MatchId]);
-            });
+    setEdit(value: boolean) {
+        this.isEdit = value;
     }
 }

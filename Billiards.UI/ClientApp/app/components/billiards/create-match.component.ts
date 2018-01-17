@@ -36,16 +36,22 @@ export class CreateMatchComponent implements OnInit{
         );
     }
 
-    validateUser1(): boolean {
-        return this.User1Id > 0;
+    validateUser1(value: number) {
+        if (value > 0)
+            this.hasUser1IdError = false;
+        else
+            this.hasUser1IdError = true;
     }
 
-    validateUser2(): boolean {
-        return this.User2Id > 0;
+    validateUser2(value: number) {
+        if (value > 0)
+            this.hasUser2IdError = false;
+        else
+            this.hasUser2IdError = true;
     }
 
-    validateForm() {
-        return this.User1Id > 0 && this.User2Id > 0;
+    isFormInvalid() {
+        return this.User1Id == 0 || this.User2Id == 0;
     }
 
     saveMatch(formValues: any){

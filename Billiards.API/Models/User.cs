@@ -30,6 +30,8 @@ namespace Billiards.API.Models
 
         public bool IsActive { get; set; }
 
+        public int Handicap { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }
 

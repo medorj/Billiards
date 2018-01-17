@@ -6,3 +6,4 @@ export * from './game.component';
 export * from './billiards-route-activator.service';
 export * from './match-progress.component';
 export * from './name.pipe';
+export * from './game-details.component';

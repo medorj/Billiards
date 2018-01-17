@@ -24,6 +24,7 @@
   <ItemGroup>
     <None Remove="ClientApp\app\components\billiards\billiards-route-activator.service.ts" />
     <None Remove="ClientApp\app\components\billiards\billiards.module.ts" />
+    <None Remove="ClientApp\app\components\billiards\game-details.component.ts" />
     <None Remove="ClientApp\app\components\billiards\game-user.class.ts" />
     <None Remove="ClientApp\app\components\billiards\match.class.ts" />
     <None Remove="ClientApp\app\components\billiards\name.pipe.ts" />
@@ -47,6 +48,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\billiards\billiards-route-activator.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\billiards.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\billiards\game-details.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\game-user.class.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\match-progress.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\match.class.ts" />

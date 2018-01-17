@@ -202,6 +202,8 @@
     <Compile Include="Models\GameUser.cs" />
     <Compile Include="Models\GameUserViewModel.cs" />
     <Compile Include="Models\GameViewModel.cs" />
+    <Compile Include="Models\HandicapMatrix.cs" />
+    <Compile Include="Models\HandicapMatrixViewModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\MatchViewModel.cs" />

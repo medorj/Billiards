@@ -100,11 +100,23 @@ namespace Billiards.API.Controllers
         {
             try
             {
-                var efMatch = new Match();
-                efMatch.Date = match.Date;
-                efMatch.User1Id = match.User1Id;
-                efMatch.User2Id = match.User2Id;
-                efMatch.IsActive = true;
+                var efMatch = new Match
+                {
+                    Date = match.Date,
+                    User1Id = match.User1Id,
+                    User2Id = match.User2Id,
+                    IsActive = true
+                };
+                var user1 = _db.Users.FirstOrDefault(u => u.UserId == match.User1Id);
+                var user2 = _db.Users.FirstOrDefault(u => u.UserId == match.User2Id);
+                var matrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == user1.Handicap && h.Player2 == user2.Handicap);
+                int minWins = matrix.Player1Wins < matrix.Player2Wins ? matrix.Player1Wins : matrix.Player2Wins;
+
+                for(int i = 1; i <= minWins; i++)
+                {
+                    AddNewGame(ref efMatch, i);
+                }
+
                 _db.Matches.Add(efMatch);
                 _db.SaveChanges();
                 return Ok(efMatch.ToViewModel(true));
@@ -249,6 +261,35 @@ namespace Billiards.API.Controllers
             {
                 return InternalServerError(ex);
             }
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private void AddNewGame(ref Match match, int gameNumber)
+        {
+            Game efGame = new Game
+            {
+                Number = gameNumber,
+                IsActive = true,
+                Innings = 0
+            };
+            efGame.GameUsers.Add(new GameUser
+            {
+                UserId = match.User1Id,
+                IsActive = true,
+                Timeouts = 0,
+                DefensiveShots = 0,
+            });
+            efGame.GameUsers.Add(new GameUser
+            {
+                UserId = match.User2Id,
+                IsActive = true,
+                Timeouts = 0,
+                DefensiveShots = 0,
+            });
+            match.Games.Add(efGame);
         }
 
         #endregion

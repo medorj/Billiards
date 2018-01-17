@@ -20,11 +20,8 @@ export class MatchDetailsComponent implements OnInit{
             this.innings += g.Innings;
         });
     }
-    totalMatches(): number {
-        if (this.hasUnfinishedGames()) {
-            return this.match.GameCount - 1;
-        }
-        return this.match.GameCount;
+    totalGames(): number {
+        return this.match.Games.filter(g => g.WinnerUserId > 0).length;
     }
     totalInnings(): number {
         let innings: number = 0;
@@ -51,13 +48,13 @@ export class MatchDetailsComponent implements OnInit{
     }
     user1Percentage() : string {
         if (this.match && this.match.GameCount > 0) {
-            return ((this.match.User1Wins / this.totalMatches()) * 100) + '%';
+            return ((this.match.User1Wins / this.totalGames()) * 100) + '%';
         }
         return "0%";
     }
     user2Percentage() {
         if (this.match && this.match.GameCount > 0) {
-            return ((this.match.User2Wins / this.totalMatches()) * 100) + '%';
+            return ((this.match.User2Wins / this.totalGames()) * 100) + '%';
         }
         return "0%";
     }

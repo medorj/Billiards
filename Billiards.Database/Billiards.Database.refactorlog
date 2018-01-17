@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="0e68b73f-9dd5-447a-af69-952a14d0ba54" ChangeDateTime="01/16/2018 01:47:39">
+    <Property Name="ElementName" Value="[dbo].[HandicapMatrix].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HandicapMatrix]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HandicapMatrixIx" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f4ac6c8-0dd1-4ba9-8f8c-39e0c9cd0232" ChangeDateTime="01/16/2018 01:47:42">
+    <Property Name="ElementName" Value="[dbo].[HandicapMatrix].[HandicapMatrixIx]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HandicapMatrix]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HandicapMatrixId" />
+  </Operation>
+</Operations>

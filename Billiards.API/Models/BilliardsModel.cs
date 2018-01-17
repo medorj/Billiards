@@ -14,6 +14,7 @@ namespace Billiards.API.Models
 
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<GameUser> GameUsers { get; set; }
+        public virtual DbSet<HandicapMatrix> HandicapMatrixes { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Match> Matches { get; set; }
         public virtual DbSet<User> Users { get; set; }

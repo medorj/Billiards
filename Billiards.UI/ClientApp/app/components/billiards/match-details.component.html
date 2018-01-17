@@ -9,7 +9,7 @@
             </div>
             <div class="col-xs-4">
                 <div class="bold">GAMES PLAYED</div>
-                <div class="header-minor">{{totalMatches()}}</div>
+                <div class="header-minor">{{totalGames()}}</div>
             </div>
             <div class="col-xs-4">
                 <div class="bold">INNINGS</div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <match-progress [match]="matchClass"></match-progress>
+    <match-progress *ngIf="totalGames() > 0" [match]="matchClass"></match-progress>
     <hr>
     <h3>Games</h3>
     <button type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
