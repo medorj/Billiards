@@ -29,6 +29,7 @@
     <None Remove="ClientApp\app\components\billiards\match.class.ts" />
     <None Remove="ClientApp\app\components\billiards\name.pipe.ts" />
     <None Remove="ClientApp\app\components\common\configuration.ts" />
+    <None Remove="ClientApp\app\components\common\index.ts" />
     <None Remove="ClientApp\app\components\errors\404.component.ts" />
     <None Remove="ClientApp\app\components\home\about.component.ts" />
     <None Remove="ClientApp\app\components\home\index.ts" />
@@ -54,6 +55,8 @@
     <TypeScriptCompile Include="ClientApp\app\components\billiards\match.class.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\billiards\name.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\common\configuration.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\common\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\common\spinner.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\errors\404.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\home\about.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\home\index.ts" />

@@ -1,4 +1,4 @@
-<h3 *ngIf="!pageLoaded">Loading matches...</h3>
+<spinner *ngIf="!pageLoaded" [loadingText]="'Loading matches...'"></spinner>
 <div *ngIf="pageLoaded">
     <h1>Matches</h1>
     <button class="btn btn-primary" [routerLink]="['/matches/new']">Add Match</button>

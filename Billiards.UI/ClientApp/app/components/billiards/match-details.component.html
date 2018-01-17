@@ -1,4 +1,4 @@
-<h3 *ngIf="!match">Loading match...</h3>
+<spinner *ngIf="!match" [loadingText]="'Loading match...'"></spinner>
 <div *ngIf="match">
     <h2>{{match?.Title}}</h2>
     <div style="margin-bottom: 10px;">
