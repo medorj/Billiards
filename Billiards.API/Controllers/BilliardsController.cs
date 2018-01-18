@@ -113,18 +113,16 @@ namespace Billiards.API.Controllers
                     IsActive = true,
                     MatchType = match.MatchTypeId
                 };
-                var user1 = _db.Users.FirstOrDefault(u => u.UserId == match.User1Id);
-                var user2 = _db.Users.FirstOrDefault(u => u.UserId == match.User2Id);
-                var matrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == user1.Handicap && h.Player2 == user2.Handicap);
+                var matrix = GetHandicap(match.User1Id, match.User2Id);
                 int minWins = matrix.Player1Wins < matrix.Player2Wins ? matrix.Player1Wins : matrix.Player2Wins;
-
-                if(efMatch.MatchType == 2)
-                {
-                    for (int i = 1; i <= minWins; i++)
-                    {
-                        AddNewGame(ref efMatch, i);
-                    }
-                }
+                AddNewGame(ref efMatch, 1);
+                //if(efMatch.MatchType == 2)
+                //{
+                //    for (int i = 1; i <= minWins; i++)
+                //    {
+                //        AddNewGame(ref efMatch, i);
+                //    }
+                //}
 
                 _db.Matches.Add(efMatch);
                 _db.SaveChanges();
@@ -187,35 +185,10 @@ namespace Billiards.API.Controllers
                 var efMatch = _db.Matches.FirstOrDefault(m => m.MatchId == game.MatchId);
                 if (efMatch == null)
                     return BadRequest("Unable to find match.");
-
-                int maxGameNumber = 0;
-                if (efMatch.Games.Any())
-                {
-                    maxGameNumber = efMatch.Games.Where(g => g.IsActive).Max(g => g.Number);
-                }
-                Game efGame = new Game
-                {
-                    Number = maxGameNumber + 1,
-                    IsActive = true,
-                    Innings = 0
-                };
-                efGame.GameUsers.Add(new GameUser
-                {
-                    UserId = efMatch.User1Id,
-                    IsActive = true,
-                    Timeouts = 0,
-                    DefensiveShots = 0,
-                });
-                efGame.GameUsers.Add(new GameUser
-                {
-                    UserId = efMatch.User2Id,
-                    IsActive = true,
-                    Timeouts = 0,
-                    DefensiveShots = 0,
-                });
-                efMatch.Games.Add(efGame);
+                
+                var efGame = AddNewGame(ref efMatch, GetNextGameNumber(efMatch));
                 _db.SaveChanges();
-                return Ok(efMatch.ToViewModel());
+                return Ok(efGame.ToViewModel());
             }
             catch(Exception ex)
             {
@@ -228,9 +201,16 @@ namespace Billiards.API.Controllers
         {
             try
             {
+                bool shouldProcessWin = false;
                 var efGame = _db.Games.FirstOrDefault(g => g.GameId == game.GameId);
                 if (efGame == null)
                     return BadRequest("Unable to find game.");
+
+                // if winner is identified for the first time, process afterwards
+                if(efGame.WinnerUserId == null && game.WinnerUserId > 0)
+                    shouldProcessWin = true;
+
+                // set game properties
                 efGame.WinnerUserId = game.WinnerUserId;
                 efGame.IsActive = true;
                 efGame.Innings = game.Innings;
@@ -245,6 +225,11 @@ namespace Billiards.API.Controllers
                         currentUser.Timeouts = user.Timeouts;
                     }
                 }
+
+                // process win and automatically add games
+                if(shouldProcessWin)
+                    ProcessWin(ref efGame);
+
                 _db.SaveChanges();
                 return Ok(efGame.ToViewModel());
             }
@@ -276,7 +261,7 @@ namespace Billiards.API.Controllers
 
         #region Helpers
 
-        private void AddNewGame(ref Match match, int gameNumber)
+        private Game AddNewGame(ref Match match, int gameNumber)
         {
             Game efGame = new Game
             {
@@ -299,6 +284,50 @@ namespace Billiards.API.Controllers
                 DefensiveShots = 0,
             });
             match.Games.Add(efGame);
+            return efGame;
+        }
+
+        private HandicapMatrix GetHandicap(int user1Id, int user2Id)
+        {
+            var user1 = _db.Users.FirstOrDefault(u => u.UserId == user1Id);
+            var user2 = _db.Users.FirstOrDefault(u => u.UserId == user2Id);
+            var matrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == user1.Handicap && h.Player2 == user2.Handicap);
+            return matrix;
+        }
+
+        private int GetNextGameNumber(Match match)
+        {
+            int maxGameNumber = 0;
+            if (match.Games.Any())
+            {
+                maxGameNumber = match.Games.Where(g => g.IsActive).Max(g => g.Number);
+            }
+            return maxGameNumber + 1;
+        }
+
+        private void ProcessWin(ref Game game)
+        {
+            int matchId = game.MatchId;
+
+            // get the match
+            var match = _db.Matches.FirstOrDefault(m => m.MatchId == matchId);
+
+            // get the handicap
+            var matrix = GetHandicap(match.User1Id, match.User2Id);
+
+            // wins obtained
+            int user1Wins = match.Games.Count(g => g.WinnerUserId == match.User1Id);
+            int user2Wins = match.Games.Count(g => g.WinnerUserId == match.User2Id);
+
+            // wins remaining
+            int user1WinsNeeded = matrix.Player1Wins - user1Wins;
+            int user2WinsNeeded = matrix.Player2Wins - user2Wins;
+
+            // only process for APA matches
+            if(user1WinsNeeded > 0 && user2WinsNeeded > 0 && match.MatchType == 2)
+            {
+                AddNewGame(ref match, GetNextGameNumber(match));
+            }
         }
 
         #endregion

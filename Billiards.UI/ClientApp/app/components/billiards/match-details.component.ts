@@ -93,6 +93,7 @@ export class MatchDetailsComponent implements OnInit{
         let matchId : number = +this.route.snapshot.params['id'];
         this.billiardsService.addGame({ MatchId: matchId}).subscribe(
             data => {
+                this.router.navigate(['/matches', matchId, 'game', data.GameId]);
                 this.billiardsService.getMatch(matchId, this.sortDirection).subscribe(
                     data => {
                         this.match = data

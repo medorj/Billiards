@@ -10,6 +10,7 @@ namespace Billiards.API.Models
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int Handicap { get; set; }
     }
 
     public static class UserMapper
@@ -20,7 +21,8 @@ namespace Billiards.API.Models
             {
                 UserId = user.UserId,
                 FirstName = user.FirstName,
-                LastName = user.LastName
+                LastName = user.LastName,
+                Handicap = user.Handicap
             };
         }
 

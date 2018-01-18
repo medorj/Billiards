@@ -6,16 +6,18 @@
     <div *ngIf="isEdit == true">
         <form #f="ngForm" (ngSubmit)="saveGame(f.value)">
             <input type="hidden" name="GameId" [ngModel]="game.GameId">
-            <div class="small-header">INNINGS</div>
-            <button type="button" class="btn btn-default btn-custom" (click)="decrementInnings()">
-                <span class="glyphicon glyphicon-minus-sign"></span>
-            </button>
-            <span class="text-custom" ngDefaultControl name="Innings" [(ngModel)]="game.Innings">{{game.Innings}}</span>
-            <button type="button" class="btn btn-default btn-custom" (click)="incrementInnings()">
-                <span class="glyphicon glyphicon-plus-sign"></span>
-            </button>
-            <hr />
-            <div class="row">
+            <div *ngIf="game.Match?.MatchTypeId == 2">
+                <div class="small-header">INNINGS</div>
+                <button type="button" class="btn btn-default btn-custom" (click)="decrementInnings()">
+                    <span class="glyphicon glyphicon-minus-sign"></span>
+                </button>
+                <span class="text-custom" ngDefaultControl name="Innings" [(ngModel)]="game.Innings">{{game.Innings}}</span>
+                <button type="button" class="btn btn-default btn-custom" (click)="incrementInnings()">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                </button>
+                <hr />
+            </div>
+            <div *ngIf="game.Match?.MatchTypeId == 2" class="row">
                 <div class="col-xs-6" *ngFor="let gameUser of gameUsers">
                     <input type="hidden" name="GameUserId" [ngModel]="gameUser.GameUserId" />
                     <h4>{{gameUser.UserName}}</h4>

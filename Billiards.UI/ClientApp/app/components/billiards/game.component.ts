@@ -98,6 +98,7 @@ export class GameComponent implements OnInit{
                 this.game = data;
                 this.isEdit = false;
                 this.isSaving = false;
+                this.router.navigate(['/matches', this.game.MatchId])
             }
         );
     }

@@ -9,7 +9,7 @@
                         (blur)="validateUser1(op1.value)" 
                         (change)="validateUser1(op1.value)">
                     <option value="0" disabled>Choose an opponent...</option>
-                    <option *ngFor="let user of user1Users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
+                    <option *ngFor="let user of user1Users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}} ({{user.Handicap}})</option>
                 </select>
             </div>
             <div class="form-group" [class.has-error]="hasUser2IdError">
@@ -19,7 +19,7 @@
                         (blur)="validateUser2(op2.value)"
                         (change)="validateUser2(op2.value)">
                     <option value="0" disabled>Choose an opponent...</option>
-                    <option *ngFor="let user of user2Users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
+                    <option *ngFor="let user of user2Users" [value]="user.UserId">{{user.FirstName}} {{user.LastName}} ({{user.Handicap}})</option>
                 </select>
             </div>
             <div class="form-group" [class.has-error]="d.invalid && d.touched">
