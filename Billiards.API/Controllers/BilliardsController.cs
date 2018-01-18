@@ -48,7 +48,8 @@ namespace Billiards.API.Controllers
                 {
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    IsActive = true
+                    IsActive = true,
+                    Handicap = 4
                 };
                 _db.Users.Add(efUser);
                 _db.SaveChanges();

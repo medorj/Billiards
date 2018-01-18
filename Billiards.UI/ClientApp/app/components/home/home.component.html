@@ -1,11 +1,26 @@
 <h1>Billiards Tracker</h1>
 <h3>Quick Start</h3>
-<div *ngIf="isLoggedIn" class="startLink">
-    <a class="pointable" [routerLink]="['/matches/new']">Start a Match</a>
+<div *ngIf="isLoggedIn">
+    <div class="hidden-xs">
+        <div *ngIf="isLoggedIn" class="startLink">
+            <a class="pointable" [routerLink]="['/matches/new']">Start a Match</a>
+        </div>
+        <div class="startLink">
+            <a [routerLink]="['/matches']">View Matches</a>
+        </div>
+    </div>
+    <div class="visible-xs">
+        <button class="btn btn-primary btn-full" [routerLink]="['/matches/new']">Start a Match</button>
+        <button class="btn btn-success btn-full" [routerLink]="['/matches']">View Matches</button>
+    </div>
 </div>
-<div *ngIf="isLoggedIn" class="startLink">
-    <a [routerLink]="['/matches']">View Matches</a>
-</div>
-<div *ngIf="!isLoggedIn" class="startLink">
-    <a [routerLink]="['/login']">Login</a>
+<div *ngIf="!isLoggedIn" >
+    <div class="hidden-xs">
+        <div class="startLink">
+            <a [routerLink]="['/login']">Login</a>
+        </div>
+    </div>
+    <div class="visible-xs">
+        <button class="btn btn-primary btn-full" [routerLink]="['/login']">Login</button>
+    </div>
 </div>

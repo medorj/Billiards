@@ -18,3 +18,12 @@
 .startLink{
     font-size: 18px;
 }
+
+.btn-test{
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.btn-test:hover{
+    opacity: .5;
+}
