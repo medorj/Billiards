@@ -10,6 +10,7 @@ export interface IMatch{
     User2Name: string;
     User1Wins: number;
     User2Wins: number;
+    MatchTypeId: number;
 }
 
 export interface IGame{

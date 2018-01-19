@@ -1,6 +1,6 @@
 <spinner *ngIf="!match" [loadingText]="'Loading match...'"></spinner>
 <div *ngIf="match">
-    <h2>{{match?.Title}}</h2>
+    <h3>{{match?.Title}}</h3>
     <div style="margin-bottom: 10px;">
         <div class="row">
             <div class="col-sm-3 col-xs-6">
@@ -11,7 +11,7 @@
                 <div class="bold">GAMES PLAYED</div>
                 <div class="header-minor">{{totalGames()}}</div>
             </div>
-            <div class="col-sm-3 col-xs-6">
+            <div *ngIf="match?.MatchTypeId == 2" class="col-sm-3 col-xs-6">
                 <div class="bold">INNINGS</div>
                 <div class="header-minor">{{innings}}</div>
             </div>
@@ -39,8 +39,10 @@
                         <div style="font-size: 18px;">{{game.WinnerName}}</div>
                     </div>
                     <div class="col-xs-4 minheight">
-                        <div class="bold">INNINGS</div>
-                        <div style="font-size: 18px;">{{game.Innings}}</div>
+                        <div *ngIf="match?.MatchTypeId == 2" >
+                            <div class="bold">INNINGS</div>
+                            <div style="font-size: 18px;">{{game.Innings}}</div>
+                        </div>
                     </div>
                     <div class="col-xs-1 minheight icon">
                         <i class="glyphicon glyphicon-chevron-right"></i>

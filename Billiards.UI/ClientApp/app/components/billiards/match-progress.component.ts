@@ -13,7 +13,14 @@ import { ShortNamePipe } from './name.pipe';
                 {{match.match.User2Name | shortname}} : {{match.match.User2Wins}}
             </div>
         </div>
-    `
+    `,
+    styles: [
+        `
+            .progress{
+                margin-bottom: 0;
+            }
+        `
+    ]
 })
 
 export class MatchProgressComponent {

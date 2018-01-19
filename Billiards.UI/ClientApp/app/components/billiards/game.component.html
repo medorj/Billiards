@@ -93,23 +93,26 @@
                 </div>
                 <div class="col-sm-6 col-xs-12">
                     <div class="small-header">BADGES</div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="null" />
-                            None
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="1" />
-                            8-ball on the break
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="2" />
-                            8-ball break and run
-                        </label>
+                    <div *ngIf="!selectedWinner">First choose a winner...</div>
+                    <div *ngIf="selectedWinner">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="null" />
+                                None
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="1" />
+                                8-ball on the break
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Badge" [(ngModel)]="game.Badge" [value]="2" />
+                                8-ball break and run
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

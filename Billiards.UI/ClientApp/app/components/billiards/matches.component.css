@@ -21,18 +21,22 @@
     font-size: 18px;
 }
 
-.row.minheight{
-    min-height: 175px;
+.row.minheight {
+    min-height: 100px;
 }
 
-.row.minheight > .minheight{
-    min-height: 175px;
-}
+    .row.minheight > .minheight {
+        min-height: 100px;
+    }
 
 .minheight.icon {
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 .well-sm {
     padding-right: 15px;
+}
+
+hr.condensed {
+    margin: 10px 0;
 }

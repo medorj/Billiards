@@ -32,6 +32,7 @@ export class GameComponent implements OnInit{
     }
 
     refreshGame() {
+        this.selectedWinner = null;
         let id: number = +this.route.snapshot.params["gameId"];
         this.billiardsService.getGame(id).subscribe(
             data => {

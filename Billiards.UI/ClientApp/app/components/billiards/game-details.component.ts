@@ -27,28 +27,30 @@ import { BilliardsService } from './billiards.service';
                 <div class="header-minor" *ngIf="game?.WinnerName">{{game?.WinnerName}}</div>
                 <div class="header-minor" *ngIf="!game?.WinnerName">Not Set</div>
             </div>
-            <div class="col-xs-4">
+            <div *ngIf="game?.Match?.MatchTypeId == 2" class="col-xs-4">
                 <div class="small-header">INNINGS</div>
                 <div class="header-minor">{{game?.Innings}}</div>
             </div>
         </div>
-        <h4>Game Statistics</h4>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Player</th>
-                    <th>Defensive Shots</th>
-                    <th>Time Outs</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let gameUser of gameUsers">
-                    <td>{{gameUser.UserName}}</td>
-                    <td>{{gameUser.DefensiveShots}}</td>
-                    <td>{{gameUser.Timeouts}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div *ngIf="game?.Match?.MatchTypeId == 2">
+            <h4>Game Statistics</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Defensive Shots</th>
+                        <th>Time Outs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let gameUser of gameUsers">
+                        <td>{{gameUser.UserName}}</td>
+                        <td>{{gameUser.DefensiveShots}}</td>
+                        <td>{{gameUser.Timeouts}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <hr />
         <button class="btn btn-primary" (click)="toggleEdit()">Edit Game</button>
         <button class="btn btn-default" (click)="goToMatch()">Back to Match</button>
