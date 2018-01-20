@@ -4,6 +4,8 @@
     [Password]  VARCHAR (20)  NOT NULL,
     [FirstName] VARCHAR (200) NOT NULL,
     [LastName]  VARCHAR (200) NOT NULL,
-    CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([LoginId] ASC)
+    [UserId] INT NULL, 
+    CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([LoginId] ASC), 
+    CONSTRAINT [FK_Login_User] FOREIGN KEY (UserId) REFERENCES [User]([UserId])
 );
 

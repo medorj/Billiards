@@ -3,7 +3,7 @@
     [Date]     DATETIME NOT NULL,
     [User1Id]  INT      NOT NULL,
     [User2Id]  INT      NOT NULL,
-    [IsActive] BIT      NULL,
+    [IsActive] BIT      NOT NULL DEFAULT 1,
     [MatchType] INT NOT NULL DEFAULT 1, 
     [User1Points] INT NOT NULL DEFAULT 0, 
     [User2Points] INT NOT NULL DEFAULT 0, 

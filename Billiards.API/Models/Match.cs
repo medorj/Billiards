@@ -23,13 +23,13 @@ namespace Billiards.API.Models
 
         public int User2Id { get; set; }
 
-        public int User1Points { get; set; }
-
-        public int User2Points { get; set; }
-
         public bool IsActive { get; set; }
 
         public int MatchType { get; set; }
+
+        public int User1Points { get; set; }
+
+        public int User2Points { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Game> Games { get; set; }

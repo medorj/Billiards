@@ -14,6 +14,7 @@ namespace Billiards.API.Models
         {
             Games = new HashSet<Game>();
             GameUsers = new HashSet<GameUser>();
+            Logins = new HashSet<Login>();
             Matches = new HashSet<Match>();
             Matches1 = new HashSet<Match>();
         }
@@ -37,6 +38,9 @@ namespace Billiards.API.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GameUser> GameUsers { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Login> Logins { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Match> Matches { get; set; }

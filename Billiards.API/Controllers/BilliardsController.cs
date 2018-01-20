@@ -95,7 +95,7 @@ namespace Billiards.API.Controllers
             var match = _db.Matches.FirstOrDefault(m => m.MatchId == id);
             if (match != null)
             {
-                var handicapMatrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == match.User.Handicap && h.Player2 == match.User1.Handicap);
+                var handicapMatrix = _db.HandicapMatrices.FirstOrDefault(h => h.Player1 == match.User.Handicap && h.Player2 == match.User1.Handicap);
                 return Ok(match.ToViewModel(handicapMatrix, true, orderBy));
             }
             return BadRequest("Match not found");
@@ -118,8 +118,11 @@ namespace Billiards.API.Controllers
                 };
                 var matrix = GetHandicap(match.User1Id, match.User2Id);
                 int minWins = matrix.Player1Wins < matrix.Player2Wins ? matrix.Player1Wins : matrix.Player2Wins;
-                AddNewGame(ref efMatch, 1);
-
+                //AddNewGame(ref efMatch, 1);
+                if (match.MatchTypeId == 2)
+                {
+                    SeedMatch(ref efMatch, matrix);
+                }
                 _db.Matches.Add(efMatch);
                 _db.SaveChanges();
                 return Ok(efMatch.ToViewModel(null, true));
@@ -139,7 +142,7 @@ namespace Billiards.API.Controllers
                 if (efMatch == null)
                     return BadRequest("Unable to find match.");
                 efMatch.IsActive = false;
-                foreach(Game game in efMatch.Games)
+                foreach (Game game in efMatch.Games)
                 {
                     game.IsActive = false;
                 }
@@ -181,12 +184,12 @@ namespace Billiards.API.Controllers
                 var efMatch = _db.Matches.FirstOrDefault(m => m.MatchId == game.MatchId);
                 if (efMatch == null)
                     return BadRequest("Unable to find match.");
-                
+
                 var efGame = AddNewGame(ref efMatch, GetNextGameNumber(efMatch));
                 _db.SaveChanges();
                 return Ok(efGame.ToViewModel());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
@@ -203,7 +206,7 @@ namespace Billiards.API.Controllers
                     return BadRequest("Unable to find game.");
 
                 // if winner is identified for the first time, process afterwards
-                if(efGame.WinnerUserId == null && game.WinnerUserId > 0)
+                if (efGame.WinnerUserId == null && game.WinnerUserId > 0)
                     shouldProcessWin = true;
 
                 // set game properties
@@ -222,14 +225,14 @@ namespace Billiards.API.Controllers
                     }
                 }
 
-                // process win and automatically add games
-                if(shouldProcessWin)
+                // process win and automatically add games for APA matches
+                if (shouldProcessWin)
                     ProcessWin(ref efGame);
 
                 _db.SaveChanges();
                 return Ok(efGame.ToViewModel());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return InternalServerError(ex);
             }
@@ -257,6 +260,12 @@ namespace Billiards.API.Controllers
 
         #region Helpers
 
+        /// <summary>
+        /// Add a new game to a match
+        /// </summary>
+        /// <param name="match"></param>
+        /// <param name="gameNumber"></param>
+        /// <returns></returns>
         private Game AddNewGame(ref Match match, int gameNumber)
         {
             Game efGame = new Game
@@ -287,7 +296,7 @@ namespace Billiards.API.Controllers
         {
             var user1 = _db.Users.FirstOrDefault(u => u.UserId == user1Id);
             var user2 = _db.Users.FirstOrDefault(u => u.UserId == user2Id);
-            var matrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == user1.Handicap && h.Player2 == user2.Handicap);
+            var matrix = _db.HandicapMatrices.FirstOrDefault(h => h.Player1 == user1.Handicap && h.Player2 == user2.Handicap);
             return matrix;
         }
 
@@ -301,6 +310,10 @@ namespace Billiards.API.Controllers
             return maxGameNumber + 1;
         }
 
+        /// <summary>
+        /// Process a game win
+        /// </summary>
+        /// <param name="game"></param>
         private void ProcessWin(ref Game game)
         {
             int matchId = game.MatchId;
@@ -308,6 +321,9 @@ namespace Billiards.API.Controllers
             // get the match
             var match = _db.Matches.FirstOrDefault(m => m.MatchId == matchId);
 
+            // don't process for casual matches
+            if (match.MatchType == 1) return;
+            
             // get the handicap
             var matrix = GetHandicap(match.User1Id, match.User2Id);
 
@@ -319,43 +335,54 @@ namespace Billiards.API.Controllers
             int user1WinsNeeded = matrix.Player1Wins - user1Wins;
             int user2WinsNeeded = matrix.Player2Wins - user2Wins;
 
-            // only process for APA matches
-            if(match.MatchType == 2)
+            // see if we should add more games - match isn't over
+            if (user1WinsNeeded > 0 && user2WinsNeeded > 0)
             {
-                // add game - match isn't over
-                if (user1WinsNeeded > 0 && user2WinsNeeded > 0 && match.MatchType == 2)
-                {
+                int totalGamesPlayed = user1Wins + user2Wins;
+                int totalGames = match.Games.Count();
+                int minGamesRemaining = user1WinsNeeded < user2WinsNeeded ? user1WinsNeeded : user2WinsNeeded;
+
+                int minGames = totalGamesPlayed + minGamesRemaining;
+                if(minGames > totalGames)
                     AddNewGame(ref match, GetNextGameNumber(match));
-                }
-                // process match completion
-                else if (user1WinsNeeded == 0)
+            }
+            // process match completion
+            else if (user1WinsNeeded == 0)
+            {
+                // shutout
+                if (user2WinsNeeded == matrix.Player2Wins)
                 {
-                    // shutout
-                    if (user2WinsNeeded == matrix.Player2Wins)
-                    {
-                        match.User1Points = 3;
-                        match.User2Points = 0;
-                    }
-                    else
-                    {
-                        match.User1Points = 2;
-                        match.User2Points = user2WinsNeeded == 1 ? 1 : 0;
-                    }
+                    match.User1Points = 3;
+                    match.User2Points = 0;
                 }
-                else if (user2WinsNeeded == 0)
+                else
                 {
-                    // shutout
-                    if (user1WinsNeeded == matrix.Player1Wins)
-                    {
-                        match.User2Points = 3;
-                        match.User1Points = 0;
-                    }
-                    else
-                    {
-                        match.User2Points = 2;
-                        match.User1Points = user1WinsNeeded == 1 ? 1 : 0;
-                    }
+                    match.User1Points = 2;
+                    match.User2Points = user2WinsNeeded == 1 ? 1 : 0;
                 }
+            }
+            else if (user2WinsNeeded == 0)
+            {
+                // shutout
+                if (user1WinsNeeded == matrix.Player1Wins)
+                {
+                    match.User2Points = 3;
+                    match.User1Points = 0;
+                }
+                else
+                {
+                    match.User2Points = 2;
+                    match.User1Points = user1WinsNeeded == 1 ? 1 : 0;
+                }
+            }
+        }
+
+        private void SeedMatch(ref Match match, HandicapMatrix handicap)
+        {
+            int minGames = handicap.Player1Wins < handicap.Player2Wins ? handicap.Player1Wins : handicap.Player2Wins;
+            for (int i = 1; i <= minGames; i++)
+            {
+                AddNewGame(ref match, i);
             }
         }
 

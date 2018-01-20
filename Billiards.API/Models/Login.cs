@@ -26,5 +26,9 @@ namespace Billiards.API.Models
         [Required]
         [StringLength(200)]
         public string LastName { get; set; }
+
+        public int? UserId { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
