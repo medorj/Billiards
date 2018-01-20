@@ -8,6 +8,8 @@ export class Match {
     user1Wins: number;
     user2Name: string;
     user2Wins: number;
+    user1WinPercentage: number;
+    user2WinPercentage: number;
 
     constructor(match: IMatch) {
         this.match = match;

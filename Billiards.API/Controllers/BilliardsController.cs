@@ -86,7 +86,7 @@ namespace Billiards.API.Controllers
         [HttpGet]
         public IHttpActionResult GetMatches()
         {
-            return Ok(_db.Matches.Where(m => m.IsActive).OrderByDescending(m => m.Date).ToViewModel(true));
+            return Ok(_db.Matches.Where(m => m.IsActive).OrderByDescending(m => m.Date).ToViewModel(null, true));
         }
 
         [HttpGet]
@@ -95,7 +95,8 @@ namespace Billiards.API.Controllers
             var match = _db.Matches.FirstOrDefault(m => m.MatchId == id);
             if (match != null)
             {
-                return Ok(match.ToViewModel(true, orderBy));
+                var handicapMatrix = _db.HandicapMatrixes.FirstOrDefault(h => h.Player1 == match.User.Handicap && h.Player2 == match.User1.Handicap);
+                return Ok(match.ToViewModel(handicapMatrix, true, orderBy));
             }
             return BadRequest("Match not found");
         }
@@ -109,24 +110,19 @@ namespace Billiards.API.Controllers
                 {
                     Date = match.Date,
                     User1Id = match.User1Id,
+                    User1Points = 0,
                     User2Id = match.User2Id,
+                    User2Points = 0,
                     IsActive = true,
                     MatchType = match.MatchTypeId
                 };
                 var matrix = GetHandicap(match.User1Id, match.User2Id);
                 int minWins = matrix.Player1Wins < matrix.Player2Wins ? matrix.Player1Wins : matrix.Player2Wins;
                 AddNewGame(ref efMatch, 1);
-                //if(efMatch.MatchType == 2)
-                //{
-                //    for (int i = 1; i <= minWins; i++)
-                //    {
-                //        AddNewGame(ref efMatch, i);
-                //    }
-                //}
 
                 _db.Matches.Add(efMatch);
                 _db.SaveChanges();
-                return Ok(efMatch.ToViewModel(true));
+                return Ok(efMatch.ToViewModel(null, true));
             }
             catch (Exception ex)
             {
@@ -324,9 +320,42 @@ namespace Billiards.API.Controllers
             int user2WinsNeeded = matrix.Player2Wins - user2Wins;
 
             // only process for APA matches
-            if(user1WinsNeeded > 0 && user2WinsNeeded > 0 && match.MatchType == 2)
+            if(match.MatchType == 2)
             {
-                AddNewGame(ref match, GetNextGameNumber(match));
+                // add game - match isn't over
+                if (user1WinsNeeded > 0 && user2WinsNeeded > 0 && match.MatchType == 2)
+                {
+                    AddNewGame(ref match, GetNextGameNumber(match));
+                }
+                // process match completion
+                else if (user1WinsNeeded == 0)
+                {
+                    // shutout
+                    if (user2WinsNeeded == matrix.Player2Wins)
+                    {
+                        match.User1Points = 3;
+                        match.User2Points = 0;
+                    }
+                    else
+                    {
+                        match.User1Points = 2;
+                        match.User2Points = user2WinsNeeded == 1 ? 1 : 0;
+                    }
+                }
+                else if (user2WinsNeeded == 0)
+                {
+                    // shutout
+                    if (user1WinsNeeded == matrix.Player1Wins)
+                    {
+                        match.User2Points = 3;
+                        match.User1Points = 0;
+                    }
+                    else
+                    {
+                        match.User2Points = 2;
+                        match.User1Points = user1WinsNeeded == 1 ? 1 : 0;
+                    }
+                }
             }
         }
 

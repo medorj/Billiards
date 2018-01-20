@@ -23,6 +23,10 @@ namespace Billiards.API.Models
 
         public int User2Id { get; set; }
 
+        public int User1Points { get; set; }
+
+        public int User2Points { get; set; }
+
         public bool IsActive { get; set; }
 
         public int MatchType { get; set; }

@@ -7,10 +7,16 @@ export interface IMatch{
     Games?: IGame[];
     GameCount: number;
     User1Name: string;
-    User2Name: string;
     User1Wins: number;
+    User1Points: number;
+    User1WinPercentage: number;
+    User1WinsRemaining: number;
+    User2Name: string;
     User2Wins: number;
+    User2Points: number;
+    User2WinsRemaining: number;
     MatchTypeId: number;
+    User2WinPercentage: number;
 }
 
 export interface IGame{

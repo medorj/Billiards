@@ -34,7 +34,7 @@ namespace Billiards.API.Models
                 WinType = game.WinType,
                 Badge = game.Badge
             };
-            vm.Match = game.Match.ToViewModel(false);
+            vm.Match = game.Match.ToViewModel(null, false);
             vm.Participants = new List<UserViewModel>();
             if(game.Match != null && game.Match.User != null && game.Match.User1 != null)
             {

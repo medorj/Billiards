@@ -36,3 +36,32 @@
 .well-sm{
     padding-right: 15px;
 }
+
+.custom{
+    border: solid 1px gray;
+    min-height: 50px;
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+}
+
+.player1 {
+    background-color: #5cb85c;
+}
+
+@media(max-width: 767px){
+    .player2 {
+        margin-top: 5px;
+    }
+}
+
+.player2 {
+    background-color: #d9534f;
+}
+
+.points{
+    font-weight: bold;
+    text-align: right;
+}

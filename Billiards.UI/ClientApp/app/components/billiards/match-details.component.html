@@ -21,10 +21,66 @@
             </div>
         </div>
     </div>
-    <match-progress *ngIf="totalGames() > 0" [match]="matchClass"></match-progress>
+    <div *ngIf="match?.MatchTypeId == 1 && totalGames() > 0">
+        <h4>GAMES</h4>
+        <match-progress [match]="matchClass"></match-progress>
+    </div>
+    <div *ngIf="match?.MatchTypeId == 2 && match?.User1Points == 0 && match?.User2Points == 0">
+        <div class="row">
+            <div class="col-sm-6">
+                <div>
+                    {{match?.User1Name}}
+                    <span class="pull-right">{{match?.User1WinsRemaining}} game{{match?.User1WinsRemaining != 1 ? 's' : ''}} remaining</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" [style.width]="match?.User1WinPercentage + '%'">
+                        {{match?.User1WinPercentage > 0 ? (match?.User1WinPercentage | number : '1.0-0') + '%' : ''}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                {{match?.User2Name}}
+                <span class="pull-right">{{match?.User2WinsRemaining}} game{{match?.User2WinsRemaining != 1 ? 's' : ''}} remaining</span>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" [style.width]="match?.User2WinPercentage + '%'">
+                        {{match?.User2WinPercentage > 0 ? (match?.User2WinPercentage | number : '1.0-0') + '%' : ''}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="match?.MatchTypeId == 2 && (match?.User1Points > 0 || match?.User2Points > 0)">
+        <h4>MATCH POINTS</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="custom player1">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            {{match?.User1Name}}
+                        </div>
+                        <div class="col-xs-4 points">
+                            {{match?.User1Points}} POINT{{match?.User1Points != 1 ? 'S' : ''}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="custom player2">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            {{match?.User2Name}}
+                        </div>
+                        <div class="col-xs-4 points">
+                            {{match?.User2Points}} POINT{{match?.User2Points != 1 ? 'S' : ''}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr>
     <h3>Games</h3>
-    <button type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
+    <button *ngIf="match?.User1Points == 0 && match?.User2Points == 0" type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
     <button type="button" class="btn btn-success" (click)="toggleSort()">Toggle Sort</button>
     <div class="row" style="margin-top: 15px;">
         <div *ngFor="let game of match?.Games" class="col-md-6">
