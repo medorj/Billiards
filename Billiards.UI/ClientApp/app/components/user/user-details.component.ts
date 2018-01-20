@@ -3,7 +3,12 @@ import { UserService } from './user.service';
 import { IUser } from './user.model';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({
-    templateUrl: './user-details.component.html'
+    templateUrl: './user-details.component.html',
+    styles: [`
+        .data-value {
+            font-size: 24px;
+        }
+    `]
 })
 
 export class UserDetailsComponent{
@@ -15,8 +20,12 @@ export class UserDetailsComponent{
 
     }
 
-    ngOnInit(){
-        this.userService.getUser(+this.route.snapshot.params['id']).subscribe(
+    ngOnInit() {
+        let id = +this.route.snapshot.params['id'];
+        if (!id) {
+            id = sessionStorage["userId"];
+        }
+        this.userService.getUser(id).subscribe(
             data => {
                 this.user = data
             }

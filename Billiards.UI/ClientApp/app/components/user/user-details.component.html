@@ -1,8 +1,24 @@
-<h2>User Details</h2>
-
-<label class="control-label">First Name</label>
-<div>{{user?.FirstName}}</div>
-<label class="control-label">Last Name</label>
-<div>{{user?.LastName}}</div>
-<hr>
-<button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>
+<spinner *ngIf="!user" [loadingText]="'Getting user info...'"></spinner>
+<div *ngIf="user">
+    <h2>{{user?.FirstName}} {{user?.LastName}}</h2>
+    <div class="row">
+        <div class="col-sm-3">
+            <label>HANDICAP</label>
+            <div class="data-value">{{user?.Handicap}}</div>
+        </div>
+        <div class="col-sm-3">
+            <label>GAMES WON</label>
+            <div class="data-value">{{user?.GamesWon}}</div>
+        </div>
+        <div class="col-sm-3">
+            <label>GAMES PLAYED</label>
+            <div class="data-value">{{user?.GamesPlayed}}</div>
+        </div>
+        <div class="col-sm-3">
+            <label>WIN PERCENTAGE</label>
+            <div class="data-value">{{user?.WinPercentage * 100}}%</div>
+        </div>
+    </div>
+    <hr />
+    <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete User</button>
+</div>

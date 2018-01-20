@@ -44,10 +44,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a [routerLink]="['/profile']">View Profile</a>
+                                <a [routerLink]="['/user/profile']">View Profile</a>
                             </li>
                             <li>
-                                <a [routerLink]="['/user/profile']" (click)="hideNav()">Edit Profile</a>
+                                <a [routerLink]="['/profile/edit']" (click)="hideNav()">Edit Profile</a>
                             </li>
                             <li>
                                 <a [routerLink]="['home']" (click)="logout()">Logout</a>

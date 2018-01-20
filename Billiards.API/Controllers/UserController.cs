@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Billiards.API.Controllers
@@ -36,7 +35,7 @@ namespace Billiards.API.Controllers
             {
                 return BadRequest("Unable to find user.");
             }
-            return Ok(user.ToViewModel());
+            return Ok(user.ToViewModel(true));
         }
 
         [HttpPost]
@@ -78,6 +77,13 @@ namespace Billiards.API.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [HttpGet]
+        public IHttpActionResult GetStatistics(int userId)
+        {
+            return Ok(true);
+        }
+
 
         #endregion
     }

@@ -8,10 +8,14 @@
         <div class="startLink">
             <a [routerLink]="['/matches']">View Matches</a>
         </div>
+        <div class="startLink">
+            <a [routerLink]="['/user/profile']">User Profile</a>
+        </div>
     </div>
     <div class="visible-xs">
         <button class="btn btn-primary btn-full" [routerLink]="['/matches/new']">Start a Match</button>
         <button class="btn btn-success btn-full" [routerLink]="['/matches']">View Matches</button>
+        <button class="btn btn-default btn-full" [routerLink]="['/user/profile']">User Profile</button>
     </div>
 </div>
 <div *ngIf="!isLoggedIn" >
