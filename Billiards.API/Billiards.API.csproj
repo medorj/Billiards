@@ -193,6 +193,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BilliardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -205,6 +206,7 @@
     <Compile Include="Models\HandicapMatrix.cs" />
     <Compile Include="Models\HandicapMatrixViewModel.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Models\MatchViewModel.cs" />
     <Compile Include="Models\User.cs" />

@@ -8,7 +8,7 @@ namespace Billiards.API.Models
     public partial class BilliardsModel : DbContext
     {
         public BilliardsModel()
-            : base("name=BilliardsModel")
+            : base("name=Billiards")
         {
         }
 

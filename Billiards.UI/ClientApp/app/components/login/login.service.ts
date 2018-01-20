@@ -35,6 +35,7 @@ export class LoginService {
             (user: any) => {
                 if (!!user.UserName) {
                     sessionStorage["loginId"] = user.LoginId;
+                    sessionStorage["userId"] = user.UserId;
                     this.currentUser = <ILogin>user;
                 }
             })
@@ -84,6 +85,7 @@ export class LoginService {
 
     logout() {
         sessionStorage.removeItem("loginId");
+        sessionStorage.removeItem("userId");
         this.currentUser = null;
     }
 }

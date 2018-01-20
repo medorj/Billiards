@@ -25,7 +25,7 @@ namespace Billiards.API.Controllers
                     return BadRequest("Unable to find the user.");
                 if (login.Password != efLogin.Password)
                     return BadRequest("You have entered invalid credentials.");
-                return Ok(efLogin);
+                return Ok(efLogin.ToViewModel());
             }
             catch (Exception ex)
             {
@@ -41,14 +41,15 @@ namespace Billiards.API.Controllers
                 Login efLogin = _db.Logins.FirstOrDefault(l => l.LoginId == login.LoginId);
                 if (efLogin == null)
                     return BadRequest("Unable to find login.");
-                return Ok(new Login
+                var newLogin = new Login
                 {
                     LoginId = efLogin.LoginId,
                     FirstName = efLogin.FirstName,
                     LastName = efLogin.LastName,
                     UserName = efLogin.UserName,
                     Password = efLogin.Password
-                });
+                };
+                return Ok(newLogin.ToViewModel());
             }
             catch(Exception ex)
             {
@@ -64,7 +65,7 @@ namespace Billiards.API.Controllers
                 Login existingLogin = _db.Logins.FirstOrDefault(l => l.UserName == login.UserName);
                 if (existingLogin != null)
                     return BadRequest("User Name already exists.");
-                Login efLogin = new Models.Login
+                Login efLogin = new Login
                 {
                     FirstName = login.FirstName,
                     LastName = login.LastName,
@@ -73,7 +74,7 @@ namespace Billiards.API.Controllers
                 };
                 _db.Logins.Add(efLogin);
                 _db.SaveChanges();
-                return Ok(efLogin);
+                return Ok(efLogin.ToViewModel());
             }
             catch (Exception ex)
             {
@@ -94,7 +95,7 @@ namespace Billiards.API.Controllers
                 existingLogin.FirstName = login.FirstName;
                 existingLogin.LastName = login.LastName;
                 _db.SaveChanges();
-                return Ok(existingLogin);
+                return Ok(existingLogin.ToViewModel());
             }
             catch (Exception ex)
             {

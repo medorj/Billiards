@@ -4,4 +4,5 @@
     LastName: string;
     UserName: string;
     Password?: string;
+    UserId: number;
 }

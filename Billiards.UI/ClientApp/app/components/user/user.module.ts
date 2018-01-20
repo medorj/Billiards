@@ -20,6 +20,7 @@ import {
             { path: 'user', component: UserComponent },
             { path: 'user/new', component: CreateUserComponent },
             { path: 'user/:id', component: UserDetailsComponent },
+            { path: 'user/profile', component: UserDetailsComponent }
         ])
     ],
     providers: [UserService]

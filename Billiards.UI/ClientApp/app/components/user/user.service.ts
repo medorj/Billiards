@@ -19,21 +19,21 @@ export class UserService{
     }
 
     getUsers() : Observable<IUser[]> {
-        return this.http.get(this.baseUrl + 'Billiards/GetUsers').catch(this.handleError);
+        return this.http.get(this.baseUrl + 'User/GetUsers').catch(this.handleError);
     }
 
     getUser(id: number){
-        return this.http.get(this.baseUrl + 'Billiards/GetUser?id=' + id).catch(this.handleError);
+        return this.http.get(this.baseUrl + 'User/GetUser?id=' + id).catch(this.handleError);
     }
 
     addUser(user: any){
         let body = JSON.stringify(user);
-        return this.http.post(this.baseUrl + 'Billiards/SaveUser', body, httpOptions).catch(this.handleError);
+        return this.http.post(this.baseUrl + 'User/SaveUser', body, httpOptions).catch(this.handleError);
     }
 
     deleteUser(user: any){
         let body = JSON.stringify(user);
-        return this.http.post(this.baseUrl + 'Billiards/DeleteUser', body, httpOptions).catch(this.handleError);
+        return this.http.post(this.baseUrl + 'User/DeleteUser', body, httpOptions).catch(this.handleError);
     }
 
     private handleError(error:any){
