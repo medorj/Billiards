@@ -16,7 +16,7 @@
         </div>
         <div class="col-sm-3">
             <label>WIN PERCENTAGE</label>
-            <div class="data-value">{{user?.WinPercentage * 100}}%</div>
+            <div class="data-value">{{user?.WinPercentage * 100 | number: '1.0-2'}}%</div>
         </div>
     </div>
     <hr />

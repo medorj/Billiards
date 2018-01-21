@@ -38,6 +38,7 @@
     <None Remove="ClientApp\app\components\login\login.module.ts" />
     <None Remove="ClientApp\app\components\login\login.service.ts" />
     <None Remove="ClientApp\app\components\login\registration.component.ts" />
+    <None Remove="ClientApp\app\components\statistics\statistics.component.ts" />
     <None Remove="ClientApp\app\components\user\authentication-route-activator.service.ts" />
     <None Remove="ClientApp\app\components\user\login.component.ts" />
     <None Remove="ClientApp\app\components\user\user.module.ts" />
@@ -67,6 +68,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\login\authentication-route-activator.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\registration.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\statistics\statistics.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\user\user.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared.module.ts" />

@@ -1,7 +1,7 @@
-﻿<h1>Login</h1>
-<hr />
-<h2 *ngIf="isLoggingIn">Logging you in...</h2>
+﻿<spinner *ngIf="isLoggingIn" [loadingText]="'Logging you in...'"></spinner>
 <div *ngIf="!isLoggingIn" class="row">
+    <h1>Login</h1>
+    <hr />
     <div *ngIf="!isLoggingIn" class="col-sm-4">
         <form #f="ngForm" (ngSubmit)="login(f.value)" autocomplete="off" novalidate>
             <div class="form-group">
