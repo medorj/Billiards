@@ -72,6 +72,7 @@
   <ItemGroup>
     <None Include="Billiards.Database.publish.xml" />
     <None Include="scripts\PopulateHandicapMatrix.sql" />
+    <None Include="Billiards.Database.publish.local.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="scripts\Script.PostDeployment.sql" />

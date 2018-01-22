@@ -5,4 +5,5 @@
     UserName: string;
     Password?: string;
     UserId: number;
+    RoleId: number;
 }

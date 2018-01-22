@@ -7,15 +7,20 @@
         <div class="col-md-6" *ngFor="let match of matchClasses">
             <div class="well well-sm" [routerLink]="['/matches', match.match.MatchId]">
                 <div class="row minheight">
-                    <div class="col-xs-11 minheight">
+                    <div class="col-xs-10 minheight">
                         <h4>{{match.match.Title}}</h4>
                         <div style="font-size: 16px">{{match.match.Date | date:'MM/dd/yyyy'}} | {{match.match.MatchType}}</div>
                         <div style="font-size: 16px">{{match.totalGames()}} Game{{match.totalGames() != 1 ? 's' : ''}} Played</div>
                         <hr class="condensed"/>
-                        <match-progress *ngIf="match.totalGames() > 0" [match]="match"></match-progress>
                     </div>
-                    <div class="col-xs-1 minheight icon">
+                    <div class="col-xs-2 minheight icon" style="text-align: right;">
                         <i class="glyphicon glyphicon-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <span *ngIf="match.totalGames() == 0">No games played</span>
+                        <match-progress *ngIf="match.totalGames() > 0" [match]="match"></match-progress>
                     </div>
                 </div>
             </div>

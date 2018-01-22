@@ -80,8 +80,8 @@
     </div>
     <hr>
     <h3>Games</h3>
-    <button *ngIf="match?.User1Points == 0 && match?.User2Points == 0" type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
-    <button type="button" class="btn btn-success" (click)="toggleSort()">Toggle Sort</button>
+    <button *ngIf=" match?.MatchTypeId == 1 && match?.User1Points == 0 && match?.User2Points == 0" type="button" class="btn btn-primary" (click)="addGame()" [disabled]="hasUnfinishedGames()">Add Game</button>
+    <button *ngIf="match?.MatchTypeId != 2" type="button" class="btn btn-success" (click)="toggleSort()">Toggle Sort</button>
     <div class="row" style="margin-top: 15px;">
         <div *ngFor="let game of match?.Games" class="col-md-6">
             <div class="well well-sm" [routerLink]="['game', game?.GameId]">
@@ -94,13 +94,13 @@
                         <div class="bold">WINNER</div>
                         <div style="font-size: 18px;">{{game.WinnerName}}</div>
                     </div>
-                    <div class="col-xs-4 minheight">
+                    <div class="col-xs-3 minheight">
                         <div *ngIf="match?.MatchTypeId == 2" >
                             <div class="bold">INNINGS</div>
                             <div style="font-size: 18px;">{{game.Innings}}</div>
                         </div>
                     </div>
-                    <div class="col-xs-1 minheight icon">
+                    <div class="col-xs-2 minheight icon" style="text-align: right;">
                         <i class="glyphicon glyphicon-chevron-right"></i>
                     </div>
                 </div>

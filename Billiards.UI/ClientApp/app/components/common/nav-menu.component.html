@@ -28,7 +28,7 @@
                 <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
                     <a routerLink="matches">Matches</a>
                 </li>
-                <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                <li routerLinkActive="active" *ngIf="loginService.isAuthenticated() && loginService.currentUser.RoleId == 1" (click)="hideNav()">
                     <a [routerLink]="['user']">User Setup</a>
                 </li>
             </ul>

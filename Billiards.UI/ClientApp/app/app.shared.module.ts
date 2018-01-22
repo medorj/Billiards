@@ -8,6 +8,7 @@ import { LoginModule } from './components/login/login.module';
 import { AppComponent } from './components/app/app.component';
 import { AboutComponent, HomeComponent } from './components/home/index';
 import { Error404Component } from './components/errors/404.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import {
     // components
     NavMenuComponent,
@@ -23,7 +24,8 @@ import {
         NavMenuComponent,
         HomeComponent,
         AboutComponent,
-        Error404Component
+        Error404Component,
+        StatisticsComponent
     ],
     imports: [
         SharedModule,
@@ -35,6 +37,7 @@ import {
             { path: '404', component: Error404Component },
             { path: 'home', component: HomeComponent },
             { path: 'home/about', component: AboutComponent },
+            { path: 'stats', component: StatisticsComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

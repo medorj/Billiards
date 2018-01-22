@@ -5,6 +5,7 @@
     [FirstName] VARCHAR (200) NOT NULL,
     [LastName]  VARCHAR (200) NOT NULL,
     [UserId] INT NULL, 
+    [RoleId] INT NULL, 
     CONSTRAINT [PK_Login] PRIMARY KEY CLUSTERED ([LoginId] ASC), 
     CONSTRAINT [FK_Login_User] FOREIGN KEY (UserId) REFERENCES [User]([UserId])
 );

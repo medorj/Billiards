@@ -13,6 +13,7 @@ namespace Billiards.API.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public int? UserId { get; set; }
+        public int? RoleId { get; set; }
     }
 
     public static class LoginMapper
@@ -26,7 +27,8 @@ namespace Billiards.API.Models
                 LastName = login.LastName,
                 UserName = login.UserName,
                 Password = login.Password,
-                UserId = login.UserId
+                UserId = login.UserId,
+                RoleId = login.RoleId
             };
         }
 

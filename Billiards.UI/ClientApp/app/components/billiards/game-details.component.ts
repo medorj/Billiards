@@ -54,7 +54,7 @@ import { BilliardsService } from './billiards.service';
         <hr />
         <button class="btn btn-primary" (click)="toggleEdit()">Edit Game</button>
         <button class="btn btn-default" (click)="goToMatch()">Back to Match</button>
-        <button class="btn btn-danger" (click)="deleteGame()">Delete Game</button>
+        <button *ngIf="game?.Match?.MatchTypeId == 1" class="btn btn-danger" (click)="deleteGame()">Delete Game</button>
     `
 })
 

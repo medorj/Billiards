@@ -41,15 +41,7 @@ namespace Billiards.API.Controllers
                 Login efLogin = _db.Logins.FirstOrDefault(l => l.LoginId == login.LoginId);
                 if (efLogin == null)
                     return BadRequest("Unable to find login.");
-                var newLogin = new Login
-                {
-                    LoginId = efLogin.LoginId,
-                    FirstName = efLogin.FirstName,
-                    LastName = efLogin.LastName,
-                    UserName = efLogin.UserName,
-                    Password = efLogin.Password
-                };
-                return Ok(newLogin.ToViewModel());
+                return Ok(efLogin.ToViewModel());
             }
             catch(Exception ex)
             {

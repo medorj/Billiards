@@ -191,6 +191,42 @@ namespace Billiards.API.Controllers
 
         #endregion
 
+        #region Statistics
+
+        [HttpGet]
+        public IHttpActionResult GetHeadToHead(int player1, int player2)
+        {
+            var user1 = _db.Users.FirstOrDefault(u => u.UserId == player1);
+            var user2 = _db.Users.FirstOrDefault(u => u.UserId == player2);
+
+            var matches = _db.Matches
+                .Where(m => m.IsActive &&
+                (m.User1Id == player1 || m.User1Id == player2) 
+                && (m.User2Id == player1 || m.User2Id == player2));
+
+            int player1Wins = 0;
+            int player2Wins = 0;
+
+            foreach(var match in matches)
+            {
+                player1Wins += match.Games.Count(g => g.IsActive && g.WinnerUserId == player1);
+                player2Wins += match.Games.Count(g => g.IsActive && g.WinnerUserId == player2);
+            }
+
+            var data = new
+            {
+                Player1Name = user1.FirstName + " " + user1.LastName,
+                Player2Name = user2.FirstName + " " + user2.LastName,
+                Player1Wins = player1Wins,
+                Player2Wins = player2Wins,
+                TotalGames = player1Wins + player2Wins
+            };
+
+            return Ok(data);
+        }
+
+        #endregion
+
         #region Helpers
 
         /// <summary>
