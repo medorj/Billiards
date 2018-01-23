@@ -28,8 +28,19 @@
                 <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
                     <a routerLink="matches">Matches</a>
                 </li>
-                <li routerLinkActive="active" *ngIf="loginService.isAuthenticated() && loginService.currentUser.RoleId == 1" (click)="hideNav()">
-                    <a [routerLink]="['user']">User Setup</a>
+                <li routerLinkActive="active" *ngIf="loginService.currentUser?.RoleId == 1">
+                    <a class="dropdown-toggle pointable" data-toggle="dropdown">
+                        Admin
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                            <a [routerLink]="['user']">User Setup</a>
+                        </li>
+                    </ul>
+                </li>
+                <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                    <a [routerLink]="['stats']">Stats</a>
                 </li>
             </ul>
             <div class="navbar-header navbar-right">

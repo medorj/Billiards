@@ -219,7 +219,9 @@ namespace Billiards.API.Controllers
                 Player2Name = user2.FirstName + " " + user2.LastName,
                 Player1Wins = player1Wins,
                 Player2Wins = player2Wins,
-                TotalGames = player1Wins + player2Wins
+                TotalGames = player1Wins + player2Wins,
+                Player1Percentage = (player1Wins + player2Wins) > 0 ? (double)player1Wins / (player1Wins + player2Wins) : 0,
+                Player2Percentage = (player1Wins + player2Wins) > 0 ? (double)player2Wins / (player1Wins + player2Wins) : 0
             };
 
             return Ok(data);

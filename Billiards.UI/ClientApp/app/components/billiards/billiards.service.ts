@@ -52,6 +52,10 @@ export class BilliardsService{
         return this.http.post(this.baseUrl + 'Billiards/DeleteGame', game, httpOptions).catch(this.handleError);
     }
 
+    getHeadToHead(player1: number, player2: number) {
+        return this.http.get(this.baseUrl + 'Billiards/GetHeadToHead?player1=' + player1 + "&player2=" + player2);
+    }
+
     private handleError(error:any){
         console.log('HTTP ERROR: ' + error);
         return Observable.throw(error.statusText);

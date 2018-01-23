@@ -1,1 +1,35 @@
 ﻿<h2>Game Statistics</h2>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label class="control-label">Player 1</label>
+            <select #p1 class="form-control" (change)="enableCompare(p1.value, p2.value)">
+                <option value="0" disabled>choose a player...</option>
+                <option *ngFor="let player of player1Users" [value]="player.UserId">{{player.FirstName}} {{player.LastName}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Player 2</label>
+            <select #p2 class="form-control" (change)="enableCompare(p1.value, p2.value)">
+                <option value="0" disabled>choose a player...</option>
+                <option *ngFor="let player of player2Users" [value]="player.UserId">{{player.FirstName}} {{player.LastName}}</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" [disabled]="!enable" (click)="compare(p1.value, p2.value)">Compare</button>
+    </div>
+</div>
+<div *ngIf="compareData">
+    <hr />
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" [style.width]="compareData?.Player1Percentage | percent">
+                    {{compareData?.Player1Name}} ({{compareData?.Player1Wins}})
+                </div>
+                <div class="progress-bar progress-bar-danger" [style.width]="compareData?.Player2Percentage | percent">
+                    {{compareData?.Player2Name}} ({{compareData?.Player2Wins}})
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

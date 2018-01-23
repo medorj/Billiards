@@ -5,7 +5,7 @@
             <div class="form-group" [class.has-error]="hasUser1IdError">
                 <label class="control-label">Player 1</label>
                 <em *ngIf="hasUser1IdError">Required</em>
-                <select #op1 class="form-control" name="User1Id" [(ngModel)]="User1Id" 
+                <select #op1 class="form-control" name="User1Id" [(ngModel)]="User1Id"
                         (blur)="validateUser1(op1.value)" 
                         (change)="validateUser1(op1.value)">
                     <option value="0" disabled>Choose an opponent...</option>
