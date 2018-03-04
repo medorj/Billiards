@@ -34,8 +34,11 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li routerLinkActive="active" *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                        <li *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
                             <a [routerLink]="['user']">User Setup</a>
+                        </li>
+                        <li *ngIf="loginService.isAuthenticated()" (click)="hideNav()">
+                            <a [routerLink]="['/user/link']">Link Users</a>
                         </li>
                     </ul>
                 </li>
@@ -55,7 +58,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a [routerLink]="['/user/profile']">View Profile</a>
+                                <a [routerLink]="['/user/profile']" (click)="hideNav()">View Profile</a>
                             </li>
                             <li>
                                 <a [routerLink]="['/profile/edit']" (click)="hideNav()">Edit Profile</a>

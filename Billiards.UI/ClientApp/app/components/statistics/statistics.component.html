@@ -1,6 +1,7 @@
 ﻿<h2>Game Statistics</h2>
-<div class="row">
-    <div class="col-xs-6">
+<spinner *ngIf="isLoading" loadingText="Loading..."></spinner>
+<div *ngIf="!isLoading" class="row">
+    <div class="col-sm-6">
         <div class="form-group">
             <label class="control-label">Player 1</label>
             <select #p1 class="form-control" (change)="enableCompare(p1.value, p2.value)">
@@ -18,6 +19,7 @@
         <button type="button" class="btn btn-primary" [disabled]="!enable" (click)="compare(p1.value, p2.value)">Compare</button>
     </div>
 </div>
+<spinner *ngIf="isLoadingComparison" loadingText="Getting comparision..."></spinner>
 <div *ngIf="compareData">
     <hr />
     <div class="row">

@@ -24,6 +24,12 @@ namespace Billiards.API.Models
         }
     }
 
+    public class UnlinkedUserViewModel
+    {
+        public int LoginId { get; set; }
+        public int UserId { get; set; }
+    }
+
     public static class UserMapper
     {
         public static UserViewModel ToViewModel(this User user, bool loadStatistics = false)

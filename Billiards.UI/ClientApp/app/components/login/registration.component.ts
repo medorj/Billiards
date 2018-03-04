@@ -16,7 +16,10 @@ export class RegistrationComponent {
     LastName: string;
     UserName: string;
     Password: string;
+    errorMessage: string;
     isEdit: boolean = false;
+    isSaving: boolean = false;
+    hasError: boolean = false;
 
     constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) {
         
@@ -44,9 +47,17 @@ export class RegistrationComponent {
     }
 
     saveRegistration(formValues: ILogin) {
-        this.loginService.register(formValues).subscribe(data => {
-            this.router.navigate(['/home']);
-        });
+        this.isSaving = true;
+        this.loginService.register(formValues).subscribe(
+            data => {
+                this.router.navigate(['/home']);
+            },
+            error => {
+                this.errorMessage = "Cannot save registration information. You may have entered duplicate information.";
+                this.hasError = true;
+                this.isSaving = false;
+            }
+        );
     }
 
     editRegistration(formValues: ILogin) {

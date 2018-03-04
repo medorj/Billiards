@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class CreateMatchComponent implements OnInit{
-    Date: string;
+    Date : any;
     users: IUser[] = [];
     user1Users: IUser[] = [];
     User1Id: number = 0;
@@ -23,9 +23,11 @@ export class CreateMatchComponent implements OnInit{
     hasUser2IdError: boolean = false;
     MatchTypeId: number = 1;
 
-    constructor(private billiardsService: BilliardsService, private userService: UserService, private router: Router){ }
+    constructor(private billiardsService: BilliardsService, private userService: UserService, private router: Router) {
+        this.Date = new Date();
+    }
 
-    ngOnInit(){
+    ngOnInit() {
         this.userService.getUsers().subscribe(
             data => {
                 this.users = data;

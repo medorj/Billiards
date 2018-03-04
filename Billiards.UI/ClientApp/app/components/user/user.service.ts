@@ -36,6 +36,14 @@ export class UserService{
         return this.http.post(this.baseUrl + 'User/DeleteUser', body, httpOptions).catch(this.handleError);
     }
 
+    getUnlinkedAccounts() {
+        return this.http.get(this.baseUrl + 'User/GetUnlinkedAccounts').catch(this.handleError);
+    }
+
+    saveLinkedAccount(linkedAccount : any) {
+        return this.http.post(this.baseUrl + 'User/SyncAccounts', linkedAccount, httpOptions).catch(this.handleError);
+    }
+
     private handleError(error:any){
         console.log('HTTP ERROR: ' + error);
         return Observable.throw(error.statusText);

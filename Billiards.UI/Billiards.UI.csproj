@@ -34,6 +34,7 @@
     <None Remove="ClientApp\app\components\home\about.component.ts" />
     <None Remove="ClientApp\app\components\home\index.ts" />
     <None Remove="ClientApp\app\components\login\index.ts" />
+    <None Remove="ClientApp\app\components\login\link-user.component.ts" />
     <None Remove="ClientApp\app\components\login\login.model.ts" />
     <None Remove="ClientApp\app\components\login\login.module.ts" />
     <None Remove="ClientApp\app\components\login\login.service.ts" />
@@ -62,6 +63,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\home\about.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\home\index.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\index.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\user\link-user.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.model.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\login\login.service.ts" />

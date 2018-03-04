@@ -1,6 +1,10 @@
 ﻿<h1>Register</h1>
+<div *ngIf="hasError" class="alert alert-danger">
+    <b>Error: </b>{{errorMessage}}
+</div>
+<spinner *ngIf="isSaving" [loadingText]="'Saving registration...'"></spinner>
 <h2 *ngIf="isEdit">Edit Profile</h2>
-<form *ngIf="isEdit" #f="ngForm" (ngSubmit)="editRegistration(f.value)" autocomplete="off">
+<form *ngIf="isEdit && !hasError" #f="ngForm" (ngSubmit)="editRegistration(f.value)" autocomplete="off">
     <div class="row">
         <div class="col-sm-5">
             <input type="hidden" [ngModel]="LoginId" name="LoginId" />

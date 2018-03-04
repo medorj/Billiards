@@ -84,6 +84,42 @@ namespace Billiards.API.Controllers
             return Ok(true);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetUnlinkedAccounts()
+        {
+            try
+            {
+                var logins = _db.Logins.Where(l => l.UserId == null).ToViewModel();
+                var users = _db.Users.Where(u => u.IsActive && !u.Logins.Any()).ToViewModel();
+                var data = new
+                {
+                    logins = logins,
+                    users = users
+                };
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult SyncAccounts(UnlinkedUserViewModel unlinkedUser)
+        {
+            try
+            {
+                var login = _db.Logins.Find(unlinkedUser.LoginId);
+                login.UserId = unlinkedUser.UserId;
+                _db.SaveChanges();
+                return Ok(login.ToViewModel());
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
 
         #endregion
     }

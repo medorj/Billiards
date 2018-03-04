@@ -1,0 +1,22 @@
+﻿<h2>Link User</h2>
+<div class="alert alert-success" *ngIf="showSuccess">
+    <b>Success: </b> {{message}}
+</div>
+<div class="alert alert-danger" *ngIf="showError">
+    <b>Error: </b> {{message}}
+</div>
+<form #f="ngForm" (ngSubmit)="saveLinkedAccount(f.value)">
+    <label>Unlinked Logins</label>
+    <select class="form-control" name="LoginId" [(ngModel)]="unlinkedLogin">
+        <option value="null" disabled>Choose a login account...</option>
+        <option *ngFor="let login of unlinkedLogins" [value]="login.LoginId">{{login.FirstName}} {{login.LastName}}</option>
+    </select>
+
+    <label>Unlinked Users</label>
+    <select class="form-control" name="UserId" [(ngModel)]="unlinkedUser">
+        <option value="null" disabled>Choose a user account...</option>
+        <option *ngFor="let user of unlinkedUsers" [value]="user.UserId">{{user.FirstName}} {{user.LastName}}</option>
+    </select>
+    <br />
+    <button type="submit" class="btn btn-primary">Sync Accounts</button>
+</form>
