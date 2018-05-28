@@ -34,4 +34,23 @@
             </div>
         </div>
     </div>
+    <h3>Games</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 20px;"></th>
+                <th>Date</th>
+                <th>Game</th>
+                <th>Winner</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let game of games">
+                <td [ngClass]="{'progress-bar-success': player1 == game.WinnerUserId, 'progress-bar-danger': player2 == game.WinnerUserId}">&nbsp;</td>
+                <td>{{game.Match.Date | date:'MM/dd/yyyy'}}</td>
+                <td>{{game.Number}}</td>
+                <td>{{game.WinnerName}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

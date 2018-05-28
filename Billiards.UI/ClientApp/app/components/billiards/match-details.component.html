@@ -88,7 +88,11 @@
                 <div class="row minheight">
                     <div class="col-xs-2 minheight">
                         <div class="bold">GAME</div>
-                        <div style="font-size: 18px;">{{game.Number}}</div>
+                        <div style="font-size: 18px;">
+                            {{game.Number}}
+                            <span class="pull-right" style="color: red; font-weight: bold;" *ngIf="game?.Badge == 1">8B</span>
+                            <span class="pull-right" style="color: red; font-weight: bold;" *ngIf="game?.Badge == 2">8BR</span>
+                        </div>
                     </div>
                     <div class="col-xs-5 minheight">
                         <div class="bold">WINNER</div>

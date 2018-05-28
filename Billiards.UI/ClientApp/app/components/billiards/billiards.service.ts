@@ -56,6 +56,10 @@ export class BilliardsService{
         return this.http.get(this.baseUrl + 'Billiards/GetHeadToHead?player1=' + player1 + "&player2=" + player2);
     }
 
+    getHeadToHeadGames(player1: number, player2: number) {
+        return this.http.get(this.baseUrl + 'Billiards/GetHeadToHeadGames?player1=' + player1 + '&player2=' + player2);
+    }
+
     private handleError(error:any){
         console.log('HTTP ERROR: ' + error);
         return Observable.throw(error.statusText);

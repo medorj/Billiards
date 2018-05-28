@@ -2,6 +2,7 @@
 import { IUser } from '../user/user.model';
 import { UserService } from '../user/user.service';
 import { BilliardsService } from '../billiards/billiards.service';
+import { IGame } from '../billiards/match.model';
 
 @Component({
     templateUrl: './statistics.component.html'
@@ -16,6 +17,7 @@ export class StatisticsComponent {
     enable: boolean = false;
     isLoading: boolean = false;
     isLoadingComparison: boolean = false;
+    games: IGame[] = [];
 
     constructor(private userService: UserService, private billiardsService: BilliardsService) { }
 
@@ -33,10 +35,15 @@ export class StatisticsComponent {
     }
 
     compare(p1: number, p2: number) {
+        this.player1 = p1;
+        this.player2 = p2;
         this.isLoadingComparison = true;
         this.billiardsService.getHeadToHead(p1, p2).subscribe(data => {
             this.compareData = data;
             this.isLoadingComparison = false;
+        });
+        this.billiardsService.getHeadToHeadGames(p1, p2).subscribe((data: IGame[]) => {
+            this.games = data;
         });
     }
 }

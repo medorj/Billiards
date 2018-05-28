@@ -1,7 +1,11 @@
 <spinner *ngIf="!pageLoaded" [loadingText]="'Loading game...'"></spinner>
 <spinner *ngIf="isSaving" [loadingText]="'Saving game...'"></spinner>
 <div *ngIf="pageLoaded&& !isSaving">
-    <h2>Game # {{game?.Number}}</h2>
+    <h2>
+        Game # {{game?.Number}}
+        <span class="pull-right" *ngIf="game?.Badge == 1">8 on the Break</span>
+        <span class="pull-right" *ngIf="game?.Badge == 2">8 Break and Run</span>
+    </h2>
     <game-details *ngIf="isEdit == false" [game]="game" [gameUsers]="gameUsers" (refreshGame)="refreshGame()" (editChanged)="setEdit($event)"></game-details>
     <div *ngIf="isEdit == true">
         <form #f="ngForm" (ngSubmit)="saveGame(f.value)">

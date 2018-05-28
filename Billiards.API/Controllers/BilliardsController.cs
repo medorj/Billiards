@@ -227,6 +227,28 @@ namespace Billiards.API.Controllers
             return Ok(data);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetHeadToHeadGames(int player1, int player2)
+        {
+            try
+            {
+                var games = (from g in _db.Games
+                             join m in _db.Matches on g.MatchId equals m.MatchId
+                             where ((m.User1Id == player1 && m.User2Id == player2) || (m.User1Id == player2 && m.User2Id == player1)) && g.IsActive
+                             select g)
+                             .Distinct()
+                             .OrderByDescending(g => g.Match.Date)
+                             .ThenByDescending(g => g.Number)
+                             .ToViewModel();
+                return Ok(games);
+
+            }
+            catch(Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
         #endregion
 
         #region Helpers

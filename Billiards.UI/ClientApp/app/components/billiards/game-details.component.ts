@@ -16,11 +16,15 @@ import { BilliardsService } from './billiards.service';
         }
     `],
     template: `
-    <h3>{{game?.Match.Title}}</h3>
+    <h3>
+        {{game?.Match.Title}}
+    </h3>
         <div class="row">
             <div class="col-xs-4">
                 <div class="small-header">DATE</div>
-                <div class="header-minor">{{game?.Match.Date | date: 'MM/dd/yyyy'}}</div>
+                <div class="header-minor">
+                    {{game?.Match.Date | date: 'MM/dd/yyyy'}}
+                </div>
             </div>
             <div class="col-xs-4">
                 <div class="small-header">WINNER</div>
